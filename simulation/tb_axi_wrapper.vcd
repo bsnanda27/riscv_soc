@@ -1,0 +1,2767 @@
+$date
+    Jun 19, 2026  11:32:09
+$end
+$version
+    TOOL:	ncsim(64)	15.20-s086
+$end
+$timescale
+    1 ps
+$end
+
+$scope module tb_axi_wrapper $end
+$var reg       1 !    clk  $end
+$var reg       1 "    rst  $end
+$var reg      32 #    gpio_in [31:0] $end
+$var wire     32 $    gpio_out [31:0] $end
+$var wire     32 %    gpio_dir [31:0] $end
+$var wire      1 &    spi_sck  $end
+$var wire      1 '    spi_mosi  $end
+$var reg       1 (    spi_miso  $end
+$var wire      1 )    spi_cs_n  $end
+$var wire     32 *    pc_debug [31:0] $end
+$var wire     32 +    inst_debug [31:0] $end
+$var wire      1 ,    rf_we  $end
+$var wire      5 -    rf_waddr [4:0] $end
+$var wire     32 .    rf_wdata [31:0] $end
+$var wire      1 /    br_taken_dbg  $end
+$var wire      1 0    trap_taken  $end
+$var wire     32 1    epc_debug [31:0] $end
+$var wire      1 2    timer_irq_dbg  $end
+
+$scope module dut $end
+$var parameter 32 3    ADDR_WIDTH  $end
+$var parameter 32 4    DATA_WIDTH  $end
+$var parameter 32 5    DMEM_DEPTH  $end
+$var parameter 32 6    GPIO_WIDTH  $end
+$var wire      1 7    clk  $end
+$var wire      1 8    rst  $end
+$var wire     32 9    gpio_in [31:0] $end
+$var wire     32 $    gpio_out [31:0] $end
+$var wire     32 %    gpio_dir [31:0] $end
+$var wire      1 &    spi_sck  $end
+$var wire      1 '    spi_mosi  $end
+$var wire      1 :    spi_miso  $end
+$var wire      1 )    spi_cs_n  $end
+$var wire     32 *    pc_debug [31:0] $end
+$var wire     32 +    inst_debug [31:0] $end
+$var wire      1 ,    rf_we  $end
+$var wire      5 -    rf_waddr [4:0] $end
+$var wire     32 .    rf_wdata [31:0] $end
+$var wire      1 /    br_taken_dbg  $end
+$var wire      1 0    trap_taken  $end
+$var wire     32 1    epc_debug [31:0] $end
+$var wire      1 2    timer_irq_dbg  $end
+$var parameter 32 ;    AXI_STRB  $end
+$var wire      1 <    aresetn  $end
+$var wire     32 =    imem_addr [31:0] $end
+$var wire     32 >    imem_rdata [31:0] $end
+$var wire      1 ?    mem_we  $end
+$var wire      1 @    mem_re  $end
+$var wire     32 A    mem_addr [31:0] $end
+$var wire     32 B    mem_wdata [31:0] $end
+$var wire     32 C    mem_rdata [31:0] $end
+$var wire      1 D    dmem_stall  $end
+$var wire      3 E    mem_acc_mode [2:0] $end
+$var wire     32 F    M_AWADDR [31:0] $end
+$var wire     32 G    M_ARADDR [31:0] $end
+$var wire      3 H    M_AWPROT [2:0] $end
+$var wire      3 I    M_ARPROT [2:0] $end
+$var wire      1 J    M_AWVALID  $end
+$var wire      1 K    M_AWREADY  $end
+$var wire      1 L    M_WVALID  $end
+$var wire      1 M    M_WREADY  $end
+$var wire     32 N    M_WDATA [31:0] $end
+$var wire     32 O    M_RDATA [31:0] $end
+$var wire      4 P    M_WSTRB [3:0] $end
+$var wire      2 Q    M_BRESP [1:0] $end
+$var wire      2 R    M_RRESP [1:0] $end
+$var wire      1 S    M_BVALID  $end
+$var wire      1 T    M_BREADY  $end
+$var wire      1 U    M_ARVALID  $end
+$var wire      1 V    M_ARREADY  $end
+$var wire      1 W    M_RVALID  $end
+$var wire      1 X    M_RREADY  $end
+$var wire     32 Y    S0_AWADDR [31:0] $end
+$var wire     32 Z    S0_ARADDR [31:0] $end
+$var wire      3 [    S0_AWPROT [2:0] $end
+$var wire      3 \    S0_ARPROT [2:0] $end
+$var wire      1 ]    S0_AWVALID  $end
+$var wire      1 ^    S0_AWREADY  $end
+$var wire      1 _    S0_WVALID  $end
+$var wire      1 `    S0_WREADY  $end
+$var wire      1 a    S0_BVALID  $end
+$var wire      1 b    S0_BREADY  $end
+$var wire      1 c    S0_ARVALID  $end
+$var wire      1 d    S0_ARREADY  $end
+$var wire      1 e    S0_RVALID  $end
+$var wire      1 f    S0_RREADY  $end
+$var wire     32 g    S0_WDATA [31:0] $end
+$var wire     32 h    S0_RDATA [31:0] $end
+$var wire      4 i    S0_WSTRB [3:0] $end
+$var wire      2 j    S0_BRESP [1:0] $end
+$var wire      2 k    S0_RRESP [1:0] $end
+$var wire     32 l    S1_AWADDR [31:0] $end
+$var wire     32 m    S1_ARADDR [31:0] $end
+$var wire      3 n    S1_AWPROT [2:0] $end
+$var wire      3 o    S1_ARPROT [2:0] $end
+$var wire      1 p    S1_AWVALID  $end
+$var wire      1 q    S1_AWREADY  $end
+$var wire      1 r    S1_WVALID  $end
+$var wire      1 s    S1_WREADY  $end
+$var wire      1 t    S1_BVALID  $end
+$var wire      1 u    S1_BREADY  $end
+$var wire      1 v    S1_ARVALID  $end
+$var wire      1 w    S1_ARREADY  $end
+$var wire      1 x    S1_RVALID  $end
+$var wire      1 y    S1_RREADY  $end
+$var wire     32 z    S1_WDATA [31:0] $end
+$var wire     32 {    S1_RDATA [31:0] $end
+$var wire      4 |    S1_WSTRB [3:0] $end
+$var wire      2 }    S1_BRESP [1:0] $end
+$var wire      2 ~    S1_RRESP [1:0] $end
+$var wire     32 !!   S2_AWADDR [31:0] $end
+$var wire     32 "!   S2_ARADDR [31:0] $end
+$var wire      3 #!   S2_AWPROT [2:0] $end
+$var wire      3 $!   S2_ARPROT [2:0] $end
+$var wire      1 %!   S2_AWVALID  $end
+$var wire      1 &!   S2_AWREADY  $end
+$var wire      1 '!   S2_WVALID  $end
+$var wire      1 (!   S2_WREADY  $end
+$var wire      1 )!   S2_BVALID  $end
+$var wire      1 *!   S2_BREADY  $end
+$var wire      1 +!   S2_ARVALID  $end
+$var wire      1 ,!   S2_ARREADY  $end
+$var wire      1 -!   S2_RVALID  $end
+$var wire      1 .!   S2_RREADY  $end
+$var wire     32 /!   S2_WDATA [31:0] $end
+$var wire     32 0!   S2_RDATA [31:0] $end
+$var wire      4 1!   S2_WSTRB [3:0] $end
+$var wire      2 2!   S2_BRESP [1:0] $end
+$var wire      2 3!   S2_RRESP [1:0] $end
+
+$scope module inst_mem_i $end
+$var wire     32 =    addr [31:0] $end
+$var reg      32 4!   data [31:0] $end
+$upscope $end
+
+
+$scope module core $end
+$var wire      1 7    clk  $end
+$var wire      1 8    rst  $end
+$var wire     32 =    imem_addr [31:0] $end
+$var wire     32 >    imem_rdata [31:0] $end
+$var reg       1 5!   mem_we  $end
+$var reg       1 6!   mem_re  $end
+$var reg      32 7!   mem_addr [31:0] $end
+$var reg      32 8!   mem_wdata [31:0] $end
+$var wire     32 C    mem_rdata [31:0] $end
+$var reg       3 9!   mem_acc_mode [2:0] $end
+$var wire      1 D    dmem_stall  $end
+$var reg      32 :!   pc_debug [31:0] $end
+$var reg      32 ;!   inst_debug [31:0] $end
+$var reg       1 <!   rf_we  $end
+$var reg       5 =!   rf_waddr [4:0] $end
+$var reg      32 >!   rf_wdata [31:0] $end
+$var reg       1 ?!   br_taken_dbg  $end
+$var reg       1 @!   trap_taken  $end
+$var reg      32 A!   epc_debug [31:0] $end
+$var reg       1 B!   timer_irq_dbg  $end
+$var reg       8 C!   state [7:0] $end
+$var reg      32 D!   last_read [31:0] $end
+$var parameter  8 E!   S_IDLE  $end
+$var parameter  8 F!   S_GPIO_W_REQ  $end
+$var parameter  8 G!   S_GPIO_W_WAIT  $end
+$var parameter  8 H!   S_GPIO_R_REQ  $end
+$var parameter  8 I!   S_GPIO_R_WAIT  $end
+$var parameter  8 J!   S_DMEM_W_REQ  $end
+$var parameter  8 K!   S_DMEM_W_WAIT  $end
+$var parameter  8 L!   S_DMEM_R_REQ  $end
+$var parameter  8 M!   S_DMEM_R_WAIT  $end
+$var parameter  8 N!   S_SPI_TX_REQ  $end
+$var parameter  8 O!   S_SPI_TX_WAIT  $end
+$var parameter  8 P!   S_SPI_CTL_REQ  $end
+$var parameter  8 Q!   S_SPI_CTL_WAIT  $end
+$var parameter  8 R!   S_SPI_ST_REQ  $end
+$var parameter  8 S!   S_SPI_ST_WAIT  $end
+$var parameter  8 T!   S_SPI_RX_REQ  $end
+$var parameter  8 U!   S_SPI_RX_WAIT  $end
+$var parameter  8 V!   S_DONE  $end
+$upscope $end
+
+
+$scope module axi_master_i $end
+$var parameter 32 W!   ADDR_WIDTH  $end
+$var parameter 32 X!   DATA_WIDTH  $end
+$var wire      1 7    aclk  $end
+$var wire      1 <    aresetn  $end
+$var wire      1 ?    core_mem_we  $end
+$var wire      1 @    core_mem_re  $end
+$var wire     32 A    core_mem_addr [31:0] $end
+$var wire     32 B    core_mem_wdata [31:0] $end
+$var wire      3 E    core_mem_acc [2:0] $end
+$var reg      32 Y!   core_mem_rdata [31:0] $end
+$var wire      1 D    core_stall  $end
+$var reg      32 Z!   M_AXI_AWADDR [31:0] $end
+$var reg       3 [!   M_AXI_AWPROT [2:0] $end
+$var reg       1 \!   M_AXI_AWVALID  $end
+$var wire      1 K    M_AXI_AWREADY  $end
+$var reg      32 ]!   M_AXI_WDATA [31:0] $end
+$var reg       4 ^!   M_AXI_WSTRB [3:0] $end
+$var reg       1 _!   M_AXI_WVALID  $end
+$var wire      1 M    M_AXI_WREADY  $end
+$var wire      2 Q    M_AXI_BRESP [1:0] $end
+$var wire      1 S    M_AXI_BVALID  $end
+$var reg       1 `!   M_AXI_BREADY  $end
+$var reg      32 a!   M_AXI_ARADDR [31:0] $end
+$var reg       3 b!   M_AXI_ARPROT [2:0] $end
+$var reg       1 c!   M_AXI_ARVALID  $end
+$var wire      1 V    M_AXI_ARREADY  $end
+$var wire     32 O    M_AXI_RDATA [31:0] $end
+$var wire      2 R    M_AXI_RRESP [1:0] $end
+$var wire      1 W    M_AXI_RVALID  $end
+$var reg       1 d!   M_AXI_RREADY  $end
+$var parameter  3 e!   ST_IDLE [2:0] $end
+$var parameter  3 f!   ST_WADDR [2:0] $end
+$var parameter  3 g!   ST_WDATA [2:0] $end
+$var parameter  3 h!   ST_WRESP [2:0] $end
+$var parameter  3 i!   ST_RADDR [2:0] $end
+$var parameter  3 j!   ST_RDATA [2:0] $end
+$var reg       3 k!   state [2:0] $end
+$var reg       3 l!   next_state [2:0] $end
+$var reg       1 m!   req_we  $end
+$var reg      32 n!   req_addr [31:0] $end
+$var reg      32 o!   req_wdata [31:0] $end
+$var reg       3 p!   req_acc [2:0] $end
+$var wire      1 q!   core_req  $end
+$var reg       4 r!   wstrb_comb [3:0] $end
+$var reg      32 s!   rdata_extended [31:0] $end
+$var reg       8 t!   byte_sel [7:0] $end
+$var reg      16 u!   half_sel [15:0] $end
+$upscope $end
+
+
+$scope module axi_ic_i $end
+$var parameter 32 v!   ADDR_WIDTH  $end
+$var parameter 32 w!   DATA_WIDTH  $end
+$var wire      1 7    aclk  $end
+$var wire      1 <    aresetn  $end
+$var wire     32 F    M_AWADDR [31:0] $end
+$var wire      3 H    M_AWPROT [2:0] $end
+$var wire      1 J    M_AWVALID  $end
+$var wire      1 K    M_AWREADY  $end
+$var wire     32 N    M_WDATA [31:0] $end
+$var wire      4 P    M_WSTRB [3:0] $end
+$var wire      1 L    M_WVALID  $end
+$var wire      1 M    M_WREADY  $end
+$var wire      2 Q    M_BRESP [1:0] $end
+$var wire      1 S    M_BVALID  $end
+$var wire      1 T    M_BREADY  $end
+$var wire     32 G    M_ARADDR [31:0] $end
+$var wire      3 I    M_ARPROT [2:0] $end
+$var wire      1 U    M_ARVALID  $end
+$var wire      1 V    M_ARREADY  $end
+$var wire     32 O    M_RDATA [31:0] $end
+$var wire      2 R    M_RRESP [1:0] $end
+$var wire      1 W    M_RVALID  $end
+$var wire      1 X    M_RREADY  $end
+$var wire     32 Y    S0_AWADDR [31:0] $end
+$var wire      3 [    S0_AWPROT [2:0] $end
+$var wire      1 ]    S0_AWVALID  $end
+$var wire      1 ^    S0_AWREADY  $end
+$var wire     32 g    S0_WDATA [31:0] $end
+$var wire      4 i    S0_WSTRB [3:0] $end
+$var wire      1 _    S0_WVALID  $end
+$var wire      1 `    S0_WREADY  $end
+$var wire      2 j    S0_BRESP [1:0] $end
+$var wire      1 a    S0_BVALID  $end
+$var wire      1 b    S0_BREADY  $end
+$var wire     32 Z    S0_ARADDR [31:0] $end
+$var wire      3 \    S0_ARPROT [2:0] $end
+$var wire      1 c    S0_ARVALID  $end
+$var wire      1 d    S0_ARREADY  $end
+$var wire     32 h    S0_RDATA [31:0] $end
+$var wire      2 k    S0_RRESP [1:0] $end
+$var wire      1 e    S0_RVALID  $end
+$var wire      1 f    S0_RREADY  $end
+$var wire     32 l    S1_AWADDR [31:0] $end
+$var wire      3 n    S1_AWPROT [2:0] $end
+$var wire      1 p    S1_AWVALID  $end
+$var wire      1 q    S1_AWREADY  $end
+$var wire     32 z    S1_WDATA [31:0] $end
+$var wire      4 |    S1_WSTRB [3:0] $end
+$var wire      1 r    S1_WVALID  $end
+$var wire      1 s    S1_WREADY  $end
+$var wire      2 }    S1_BRESP [1:0] $end
+$var wire      1 t    S1_BVALID  $end
+$var wire      1 u    S1_BREADY  $end
+$var wire     32 m    S1_ARADDR [31:0] $end
+$var wire      3 o    S1_ARPROT [2:0] $end
+$var wire      1 v    S1_ARVALID  $end
+$var wire      1 w    S1_ARREADY  $end
+$var wire     32 {    S1_RDATA [31:0] $end
+$var wire      2 ~    S1_RRESP [1:0] $end
+$var wire      1 x    S1_RVALID  $end
+$var wire      1 y    S1_RREADY  $end
+$var wire     32 !!   S2_AWADDR [31:0] $end
+$var wire      3 #!   S2_AWPROT [2:0] $end
+$var wire      1 %!   S2_AWVALID  $end
+$var wire      1 &!   S2_AWREADY  $end
+$var wire     32 /!   S2_WDATA [31:0] $end
+$var wire      4 1!   S2_WSTRB [3:0] $end
+$var wire      1 '!   S2_WVALID  $end
+$var wire      1 (!   S2_WREADY  $end
+$var wire      2 2!   S2_BRESP [1:0] $end
+$var wire      1 )!   S2_BVALID  $end
+$var wire      1 *!   S2_BREADY  $end
+$var wire     32 "!   S2_ARADDR [31:0] $end
+$var wire      3 $!   S2_ARPROT [2:0] $end
+$var wire      1 +!   S2_ARVALID  $end
+$var wire      1 ,!   S2_ARREADY  $end
+$var wire     32 0!   S2_RDATA [31:0] $end
+$var wire      2 3!   S2_RRESP [1:0] $end
+$var wire      1 -!   S2_RVALID  $end
+$var wire      1 .!   S2_RREADY  $end
+$var wire      1 x!   aw_s0  $end
+$var wire      1 y!   aw_s1  $end
+$var wire      1 z!   aw_s2  $end
+$var wire      1 {!   ar_s0  $end
+$var wire      1 |!   ar_s1  $end
+$var wire      1 }!   ar_s2  $end
+$var reg       2 ~!   wsel [1:0] $end
+$var reg       2 !"   rsel [1:0] $end
+$upscope $end
+
+
+$scope module axi_dmem_i $end
+$var parameter 32 ""   ADDR_WIDTH  $end
+$var parameter 32 #"   DATA_WIDTH  $end
+$var parameter 32 $"   DEPTH  $end
+$var wire      1 7    aclk  $end
+$var wire      1 <    aresetn  $end
+$var wire     32 Y    S_AWADDR [31:0] $end
+$var wire      3 [    S_AWPROT [2:0] $end
+$var wire      1 ]    S_AWVALID  $end
+$var reg       1 %"   S_AWREADY  $end
+$var wire     32 g    S_WDATA [31:0] $end
+$var wire      4 i    S_WSTRB [3:0] $end
+$var wire      1 _    S_WVALID  $end
+$var reg       1 &"   S_WREADY  $end
+$var reg       2 '"   S_BRESP [1:0] $end
+$var reg       1 ("   S_BVALID  $end
+$var wire      1 b    S_BREADY  $end
+$var wire     32 Z    S_ARADDR [31:0] $end
+$var wire      3 \    S_ARPROT [2:0] $end
+$var wire      1 c    S_ARVALID  $end
+$var reg       1 )"   S_ARREADY  $end
+$var reg      32 *"   S_RDATA [31:0] $end
+$var reg       2 +"   S_RRESP [1:0] $end
+$var reg       1 ,"   S_RVALID  $end
+$var wire      1 f    S_RREADY  $end
+$var parameter 32 -"   AW  $end
+$var wire     13 ."   waddr [12:0] $end
+$var wire     13 /"   raddr [12:0] $end
+$var parameter  2 0"   W_IDLE [1:0] $end
+$var parameter  2 1"   W_DATA [1:0] $end
+$var parameter  2 2"   W_RESP [1:0] $end
+$var reg       2 3"   w_state [1:0] $end
+$var reg      32 4"   aw_lat [31:0] $end
+$var parameter  2 5"   R_IDLE [1:0] $end
+$var parameter  2 6"   R_DATA [1:0] $end
+$var reg       2 7"   r_state [1:0] $end
+$upscope $end
+
+
+$scope module axi_gpio_i $end
+$var parameter 32 8"   ADDR_WIDTH  $end
+$var parameter 32 9"   DATA_WIDTH  $end
+$var parameter 32 :"   GPIO_WIDTH  $end
+$var wire      1 7    aclk  $end
+$var wire      1 <    aresetn  $end
+$var wire     32 l    S_AWADDR [31:0] $end
+$var wire      3 n    S_AWPROT [2:0] $end
+$var wire      1 p    S_AWVALID  $end
+$var wire      1 q    S_AWREADY  $end
+$var wire     32 z    S_WDATA [31:0] $end
+$var wire      4 |    S_WSTRB [3:0] $end
+$var wire      1 r    S_WVALID  $end
+$var wire      1 s    S_WREADY  $end
+$var reg       2 ;"   S_BRESP [1:0] $end
+$var reg       1 <"   S_BVALID  $end
+$var wire      1 u    S_BREADY  $end
+$var wire     32 m    S_ARADDR [31:0] $end
+$var wire      3 o    S_ARPROT [2:0] $end
+$var wire      1 v    S_ARVALID  $end
+$var wire      1 w    S_ARREADY  $end
+$var reg      32 ="   S_RDATA [31:0] $end
+$var reg       2 >"   S_RRESP [1:0] $end
+$var reg       1 ?"   S_RVALID  $end
+$var wire      1 y    S_RREADY  $end
+$var wire     32 9    gpio_in [31:0] $end
+$var reg      32 @"   gpio_out [31:0] $end
+$var reg      32 A"   gpio_dir [31:0] $end
+$upscope $end
+
+
+$scope module axi_spi_i $end
+$var parameter 32 B"   ADDR_WIDTH  $end
+$var parameter 32 C"   DATA_WIDTH  $end
+$var wire      1 7    aclk  $end
+$var wire      1 <    aresetn  $end
+$var wire     32 !!   S_AWADDR [31:0] $end
+$var wire      3 #!   S_AWPROT [2:0] $end
+$var wire      1 %!   S_AWVALID  $end
+$var wire      1 &!   S_AWREADY  $end
+$var wire     32 /!   S_WDATA [31:0] $end
+$var wire      4 1!   S_WSTRB [3:0] $end
+$var wire      1 '!   S_WVALID  $end
+$var wire      1 (!   S_WREADY  $end
+$var reg       2 D"   S_BRESP [1:0] $end
+$var reg       1 E"   S_BVALID  $end
+$var wire      1 *!   S_BREADY  $end
+$var wire     32 "!   S_ARADDR [31:0] $end
+$var wire      3 $!   S_ARPROT [2:0] $end
+$var wire      1 +!   S_ARVALID  $end
+$var wire      1 ,!   S_ARREADY  $end
+$var reg      32 F"   S_RDATA [31:0] $end
+$var reg       2 G"   S_RRESP [1:0] $end
+$var reg       1 H"   S_RVALID  $end
+$var wire      1 .!   S_RREADY  $end
+$var reg       1 I"   spi_sck  $end
+$var reg       1 J"   spi_mosi  $end
+$var wire      1 :    spi_miso  $end
+$var reg       1 K"   spi_cs_n  $end
+$var reg      32 L"   ctrl_reg [31:0] $end
+$var reg      32 M"   tx_reg [31:0] $end
+$var reg      32 N"   rx_reg [31:0] $end
+$var reg       1 O"   spi_busy  $end
+$var reg       1 P"   spi_done  $end
+$var integer  32 Q"   cnt  $end
+$upscope $end
+
+$upscope $end
+
+$upscope $end
+
+$enddefinitions $end
+$dumpvars
+b100000 C"
+b100000 B"
+b100000 :"
+b100000 9"
+b100000 8"
+b1 6"
+b0 5"
+b10 2"
+b1 1"
+b0 0"
+b1101 -"
+b10000000000000 $"
+b100000 #"
+b100000 ""
+b100000 w!
+b100000 v!
+b101 j!
+b100 i!
+b11 h!
+b10 g!
+b1 f!
+b0 e!
+b100000 X!
+b100000 W!
+b10001 V!
+b10000 U!
+b1111 T!
+b1110 S!
+b1101 R!
+b1100 Q!
+b1011 P!
+b1010 O!
+b1001 N!
+b1000 M!
+b111 L!
+b110 K!
+b101 J!
+b100 I!
+b11 H!
+b10 G!
+b1 F!
+b0 E!
+b100 ;
+b100000 6
+b10000000000000 5
+b100000 4
+b100000 3
+0!
+1"
+b10010001101001010101111001101 #
+bx $
+bx %
+x&
+x'
+0(
+x)
+bx *
+bx +
+x,
+bx -
+bx .
+x/
+x0
+bx 1
+x2
+07
+18
+b10010001101001010101111001101 9
+0:
+0<
+bx =
+bx >
+x?
+x@
+bx A
+bx B
+bx C
+xD
+bx E
+bx F
+bx G
+bx H
+bx I
+xJ
+xK
+xL
+xM
+bx N
+bx O
+bx P
+bx Q
+bx R
+xS
+xT
+xU
+xV
+xW
+xX
+bx Y
+bx Z
+bx [
+bx \
+x]
+x^
+x_
+x`
+xa
+xb
+xc
+xd
+xe
+xf
+bx g
+bx h
+bx i
+bx j
+bx k
+bx l
+bx m
+bx n
+bx o
+xp
+1q
+xr
+1s
+xt
+xu
+xv
+1w
+xx
+xy
+bx z
+bx {
+bx |
+bx }
+bx ~
+bx !!
+bx "!
+bx #!
+bx $!
+x%!
+1&!
+x'!
+1(!
+x)!
+x*!
+x+!
+1,!
+x-!
+x.!
+bx /!
+bx 0!
+bx 1!
+bx 2!
+bx 3!
+bx 4!
+x5!
+x6!
+bx 7!
+bx 8!
+bx 9!
+bx :!
+bx ;!
+x<!
+bx =!
+bx >!
+x?!
+x@!
+bx A!
+xB!
+bx C!
+bx D!
+bx Y!
+bx Z!
+bx [!
+x\!
+bx ]!
+bx ^!
+x_!
+x`!
+bx a!
+bx b!
+xc!
+xd!
+bx k!
+bx l!
+xm!
+bx n!
+bx o!
+bx p!
+xq!
+bx r!
+bx s!
+bx t!
+bx u!
+xx!
+xy!
+xz!
+x{!
+x|!
+x}!
+bx ~!
+bx !"
+x%"
+x&"
+bx '"
+x("
+x)"
+bx *"
+bx +"
+x,"
+bx ."
+bx /"
+bx 3"
+bx 4"
+bx 7"
+bx ;"
+x<"
+bx ="
+bx >"
+x?"
+bx @"
+bx A"
+bx D"
+xE"
+bx F"
+bx G"
+xH"
+xI"
+xJ"
+xK"
+bx L"
+bx M"
+bx N"
+xO"
+xP"
+bx Q"
+$end
+#5000
+1!
+17
+b0 L"
+b0 M"
+b0 N"
+0O"
+0P"
+0I"
+0J"
+1K"
+b0 Q"
+0E"
+b0 D"
+0H"
+b0 G"
+b0 F"
+b0 @"
+b0 A"
+0<"
+b0 ;"
+0?"
+b0 >"
+b0 ="
+b0 7"
+0)"
+0,"
+b0 +"
+b0 *"
+b0 3"
+0%"
+0&"
+0("
+b0 '"
+b0 ~!
+b0 !"
+b0 Y!
+b0 k!
+0m!
+b0 n!
+b0 o!
+b10 p!
+b0 C!
+05!
+06!
+b0 7!
+b0 8!
+b10 9!
+b0 :!
+b0 ;!
+0<!
+b0 =!
+b0 >!
+0?!
+0@!
+b0 A!
+0B!
+b0 D!
+b0 l!
+b0 Z!
+b0 [!
+0\!
+b0 ]!
+0_!
+0`!
+b0 a!
+b0 b!
+0c!
+0d!
+b1111 r!
+b1111 ^!
+b1111 P
+b0 =
+0X
+0U
+b0 I
+b0 G
+0T
+0L
+b0 N
+0J
+b0 H
+b0 F
+0.!
+0y
+0*!
+0u
+0'!
+0r
+02
+b0 1
+00
+0/
+b0 .
+b0 -
+0,
+b0 +
+b0 *
+b10 E
+b0 B
+b0 A
+0@
+0?
+b0 C
+b0 j
+0a
+0`
+0^
+b0 h
+b0 k
+0e
+0d
+b0 {
+b0 ~
+0x
+b0 }
+0t
+b0 %
+b0 $
+b0 0!
+b0 3!
+0-!
+b0 2!
+0)!
+1)
+0'
+0&
+0q!
+0%!
+0p
+0]
+0+!
+0v
+0c
+b10011 4!
+0D
+0W
+b0 R
+b0 O
+0M
+0S
+b0 Q
+1x!
+0y!
+0z!
+b0 Y
+b0 l
+b0 !!
+b0 [
+b0 n
+b0 #!
+b0 g
+b0 z
+b0 /!
+0_
+0b
+1{!
+0|!
+0}!
+b0 Z
+b0 m
+b0 "!
+b0 \
+b0 o
+b0 $!
+0f
+b10011 >
+b1111 i
+b1111 |
+b1111 1!
+0V
+0K
+b0 t!
+b0 u!
+b0 s!
+b0 /"
+b0 ."
+#10000
+0!
+07
+#15000
+1!
+17
+#20000
+0!
+07
+#25000
+1!
+17
+#30000
+0!
+07
+#35000
+1!
+17
+#40000
+0!
+07
+#45000
+1!
+0"
+08
+17
+1<
+1)"
+1%"
+b100 :!
+b10011 ;!
+b1 C!
+b100 =
+b10011 +
+b100 *
+1^
+1d
+1V
+1K
+#50000
+0!
+07
+#55000
+1!
+17
+b1000 :!
+15!
+b1000000000000000000000000000000 7!
+b10100101101001010000000000001111 8!
+b10 C!
+b1000 =
+b10100101101001010000000000001111 B
+b1000000000000000000000000000000 A
+1?
+b1000 *
+1q!
+b1 l!
+1D
+#60000
+0!
+07
+#65000
+1!
+17
+b1 k!
+1m!
+b1000000000000000000000000000000 n!
+b10100101101001010000000000001111 o!
+b1100 :!
+05!
+b1000000000000000000000000000000 Z!
+b10100101101001010000000000001111 ]!
+b1000000000000000000000000000000 a!
+1\!
+1_!
+b10 l!
+b1100 =
+1L
+1J
+b1000000000000000000000000000000 G
+b10100101101001010000000000001111 N
+b1000000000000000000000000000000 F
+0?
+b1100 *
+0q!
+1]
+b1 l!
+0\!
+0_!
+1\!
+1_!
+b10 l!
+0x!
+1y!
+b1000000000000000000000000000000 Y
+b1000000000000000000000000000000 l
+b1000000000000000000000000000000 !!
+b10100101101001010000000000001111 g
+b10100101101001010000000000001111 z
+b10100101101001010000000000001111 /!
+0{!
+1|!
+b1000000000000000000000000000000 Z
+b1000000000000000000000000000000 m
+b1000000000000000000000000000000 "!
+1_
+1p
+0]
+#70000
+0!
+07
+#75000
+1!
+17
+b1 ~!
+b10 k!
+b10000 :!
+0\!
+0_!
+1_!
+b10000 =
+0J
+1M
+1r
+0_
+b10000 *
+0p
+0_!
+1_!
+b11 l!
+#80000
+0!
+07
+#85000
+1!
+17
+b11 k!
+b10100 :!
+0_!
+1`!
+b10100 =
+1T
+0L
+b10100 *
+0r
+1u
+#90000
+0!
+07
+#95000
+1!
+17
+b11000 :!
+b11000 =
+b11000 *
+#100000
+0!
+07
+#105000
+1!
+17
+b11100 :!
+b11100 =
+b11100 *
+#110000
+0!
+07
+#115000
+1!
+17
+b100000 :!
+b100000 =
+b100000 *
+#120000
+0!
+07
+#125000
+1!
+17
+b100100 :!
+b100100 =
+b100100 *
+#130000
+0!
+07
+#135000
+1!
+17
+b101000 :!
+b101000 =
+b101000 *
+#140000
+0!
+07
+#145000
+1!
+17
+b101100 :!
+b101100 =
+b101100 *
+#150000
+0!
+07
+#155000
+1!
+17
+b110000 :!
+b110000 =
+b110000 *
+#160000
+0!
+07
+#165000
+1!
+17
+b110100 :!
+b110100 =
+b110100 *
+#170000
+0!
+07
+#175000
+1!
+17
+b111000 :!
+b111000 =
+b111000 *
+#180000
+0!
+07
+#185000
+1!
+17
+b111100 :!
+b111100 =
+b111100 *
+#190000
+0!
+07
+#195000
+1!
+17
+b1000000 :!
+b1000000 =
+b1000000 *
+#200000
+0!
+07
+#205000
+1!
+17
+b1000100 :!
+b1000100 =
+b1000100 *
+#210000
+0!
+07
+#215000
+1!
+17
+b1001000 :!
+b1001000 =
+b1001000 *
+#220000
+0!
+07
+#225000
+1!
+17
+b1001100 :!
+b1001100 =
+b1001100 *
+#230000
+0!
+07
+#235000
+1!
+17
+b1010000 :!
+b1010000 =
+b1010000 *
+#240000
+0!
+07
+#245000
+1!
+17
+b1010100 :!
+b1010100 =
+b1010100 *
+#250000
+0!
+07
+#255000
+1!
+17
+b1011000 :!
+b1011000 =
+b1011000 *
+#260000
+0!
+07
+#265000
+1!
+17
+b1011100 :!
+b1011100 =
+b1011100 *
+#270000
+0!
+07
+#275000
+1!
+17
+b1100000 :!
+b1100000 =
+b1100000 *
+#280000
+0!
+07
+#285000
+1!
+17
+b1100100 :!
+b1100100 =
+b1100100 *
+#290000
+0!
+07
+#295000
+1!
+17
+b1101000 :!
+b1101000 =
+b1101000 *
+#300000
+0!
+07
+#305000
+1!
+17
+b1101100 :!
+b1101100 =
+b1101100 *
+#310000
+0!
+07
+#315000
+1!
+17
+b1110000 :!
+b1110000 =
+b1110000 *
+#320000
+0!
+07
+#325000
+1!
+17
+b1110100 :!
+b1110100 =
+b1110100 *
+#330000
+0!
+07
+#335000
+1!
+17
+b1111000 :!
+b1111000 =
+b1111000 *
+#340000
+0!
+07
+#345000
+1!
+17
+b1111100 :!
+b1111100 =
+b1111100 *
+#350000
+0!
+07
+#355000
+1!
+17
+b10000000 :!
+b10000000 =
+b10000000 *
+#360000
+0!
+07
+#365000
+1!
+17
+b10000100 :!
+b10000100 =
+b10000100 *
+#370000
+0!
+07
+#375000
+1!
+17
+b10001000 :!
+b10001000 =
+b10001000 *
+#380000
+0!
+07
+#385000
+1!
+17
+b10001100 :!
+b10001100 =
+b10001100 *
+#390000
+0!
+07
+#395000
+1!
+17
+b10010000 :!
+b10010000 =
+b10010000 *
+#400000
+0!
+07
+#405000
+1!
+17
+b10010100 :!
+b10010100 =
+b10010100 *
+#410000
+0!
+07
+#415000
+1!
+17
+b10011000 :!
+b10011000 =
+b10011000 *
+#420000
+0!
+07
+#425000
+1!
+17
+b10011100 :!
+b10011100 =
+b10011100 *
+#430000
+0!
+07
+#435000
+1!
+17
+b10100000 :!
+b10100000 =
+b10100000 *
+#440000
+0!
+07
+#445000
+1!
+17
+b10100100 :!
+b10100100 =
+b10100100 *
+#450000
+0!
+07
+#455000
+1!
+17
+b10101000 :!
+b10101000 =
+b10101000 *
+#460000
+0!
+07
+#465000
+1!
+17
+b10101100 :!
+b10101100 =
+b10101100 *
+#470000
+0!
+07
+#475000
+1!
+17
+b10110000 :!
+b10110000 =
+b10110000 *
+#480000
+0!
+07
+#485000
+1!
+17
+b10110100 :!
+b10110100 =
+b10110100 *
+#490000
+0!
+07
+#495000
+1!
+17
+b10111000 :!
+b10111000 =
+b10111000 *
+#500000
+0!
+07
+#505000
+1!
+17
+b10111100 :!
+b10111100 =
+b10111100 *
+#510000
+0!
+07
+#515000
+1!
+17
+b11000000 :!
+b11000000 =
+b11000000 *
+#520000
+0!
+07
+#525000
+1!
+17
+b11000100 :!
+b11000100 =
+b11000100 *
+#530000
+0!
+07
+#535000
+1!
+17
+b11001000 :!
+b11001000 =
+b11001000 *
+#540000
+0!
+07
+#545000
+1!
+17
+b11001100 :!
+b11001100 =
+b11001100 *
+#550000
+0!
+07
+#555000
+1!
+17
+b11010000 :!
+b11010000 =
+b11010000 *
+#560000
+0!
+07
+#565000
+1!
+17
+b11010100 :!
+b11010100 =
+b11010100 *
+#570000
+0!
+07
+#575000
+1!
+17
+b11011000 :!
+b11011000 =
+b11011000 *
+#580000
+0!
+07
+#585000
+1!
+17
+b11011100 :!
+b11011100 =
+b11011100 *
+#590000
+0!
+07
+#595000
+1!
+17
+b11100000 :!
+b11100000 =
+b11100000 *
+#600000
+0!
+07
+#605000
+1!
+17
+b11100100 :!
+b11100100 =
+b11100100 *
+#610000
+0!
+07
+#615000
+1!
+17
+b11101000 :!
+b11101000 =
+b11101000 *
+#620000
+0!
+07
+#625000
+1!
+17
+b11101100 :!
+b11101100 =
+b11101100 *
+#630000
+0!
+07
+#635000
+1!
+17
+b11110000 :!
+b11110000 =
+b11110000 *
+#640000
+0!
+07
+#645000
+1!
+17
+b11110100 :!
+b11110100 =
+b11110100 *
+#650000
+0!
+07
+#655000
+1!
+17
+b11111000 :!
+b11111000 =
+b11111000 *
+#660000
+0!
+07
+#665000
+1!
+17
+b11111100 :!
+b11111100 =
+b11111100 *
+#670000
+0!
+07
+#675000
+1!
+17
+b100000000 :!
+b100000000 =
+b100000000 *
+#680000
+0!
+07
+#685000
+1!
+17
+b100000100 :!
+b100000100 =
+b100000100 *
+#690000
+0!
+07
+#695000
+1!
+17
+b100001000 :!
+b100001000 =
+b100001000 *
+#700000
+0!
+07
+#705000
+1!
+17
+b100001100 :!
+b100001100 =
+b100001100 *
+#710000
+0!
+07
+#715000
+1!
+17
+b100010000 :!
+b100010000 =
+b100010000 *
+#720000
+0!
+07
+#725000
+1!
+17
+b100010100 :!
+b100010100 =
+b100010100 *
+#730000
+0!
+07
+#735000
+1!
+17
+b100011000 :!
+b100011000 =
+b100011000 *
+#740000
+0!
+07
+#745000
+1!
+17
+b100011100 :!
+b100011100 =
+b100011100 *
+#750000
+0!
+07
+#755000
+1!
+17
+b100100000 :!
+b100100000 =
+b100100000 *
+#760000
+0!
+07
+#765000
+1!
+17
+b100100100 :!
+b100100100 =
+b100100100 *
+#770000
+0!
+07
+#775000
+1!
+17
+b100101000 :!
+b100101000 =
+b100101000 *
+#780000
+0!
+07
+#785000
+1!
+17
+b100101100 :!
+b100101100 =
+b100101100 *
+#790000
+0!
+07
+#795000
+1!
+17
+b100110000 :!
+b100110000 =
+b100110000 *
+#800000
+0!
+07
+#805000
+1!
+17
+b100110100 :!
+b100110100 =
+b100110100 *
+#810000
+0!
+07
+#815000
+1!
+17
+b100111000 :!
+b100111000 =
+b100111000 *
+#820000
+0!
+07
+#825000
+1!
+17
+b100111100 :!
+b100111100 =
+b100111100 *
+#830000
+0!
+07
+#835000
+1!
+17
+b101000000 :!
+b101000000 =
+b101000000 *
+#840000
+0!
+07
+#845000
+1!
+17
+b101000100 :!
+b101000100 =
+b101000100 *
+#850000
+0!
+07
+#855000
+1!
+17
+b101001000 :!
+b101001000 =
+b101001000 *
+#860000
+0!
+07
+#865000
+1!
+17
+b101001100 :!
+b101001100 =
+b101001100 *
+#870000
+0!
+07
+#875000
+1!
+17
+b101010000 :!
+b101010000 =
+b101010000 *
+#880000
+0!
+07
+#885000
+1!
+17
+b101010100 :!
+b101010100 =
+b101010100 *
+#890000
+0!
+07
+#895000
+1!
+17
+b101011000 :!
+b101011000 =
+b101011000 *
+#900000
+0!
+07
+#905000
+1!
+17
+b101011100 :!
+b101011100 =
+b101011100 *
+#910000
+0!
+07
+#915000
+1!
+17
+b101100000 :!
+b101100000 =
+b101100000 *
+#920000
+0!
+07
+#925000
+1!
+17
+b101100100 :!
+b101100100 =
+b101100100 *
+#930000
+0!
+07
+#935000
+1!
+17
+b101101000 :!
+b101101000 =
+b101101000 *
+#940000
+0!
+07
+#945000
+1!
+17
+b101101100 :!
+b101101100 =
+b101101100 *
+#950000
+0!
+07
+#955000
+1!
+17
+b101110000 :!
+b101110000 =
+b101110000 *
+#960000
+0!
+07
+#965000
+1!
+17
+b101110100 :!
+b101110100 =
+b101110100 *
+#970000
+0!
+07
+#975000
+1!
+17
+b101111000 :!
+b101111000 =
+b101111000 *
+#980000
+0!
+07
+#985000
+1!
+17
+b101111100 :!
+b101111100 =
+b101111100 *
+#990000
+0!
+07
+#995000
+1!
+17
+b110000000 :!
+b110000000 =
+b110000000 *
+#1000000
+0!
+07
+#1005000
+1!
+17
+b110000100 :!
+b110000100 =
+b110000100 *
+#1010000
+0!
+07
+#1015000
+1!
+17
+b110001000 :!
+b110001000 =
+b110001000 *
+#1020000
+0!
+07
+#1025000
+1!
+17
+b110001100 :!
+b110001100 =
+b110001100 *
+#1030000
+0!
+07
+#1035000
+1!
+17
+b110010000 :!
+b110010000 =
+b110010000 *
+#1040000
+0!
+07
+#1045000
+1!
+17
+b110010100 :!
+b110010100 =
+b110010100 *
+#1050000
+0!
+07
+#1055000
+1!
+17
+b110011000 :!
+b110011000 =
+b110011000 *
+#1060000
+0!
+07
+#1065000
+1!
+17
+b110011100 :!
+b110011100 =
+b110011100 *
+#1070000
+0!
+07
+#1075000
+1!
+17
+b110100000 :!
+b110100000 =
+b110100000 *
+#1080000
+0!
+07
+#1085000
+1!
+17
+b110100100 :!
+b110100100 =
+b110100100 *
+#1090000
+0!
+07
+#1095000
+1!
+17
+b110101000 :!
+b110101000 =
+b110101000 *
+#1100000
+0!
+07
+#1105000
+1!
+17
+b110101100 :!
+b110101100 =
+b110101100 *
+#1110000
+0!
+07
+#1115000
+1!
+17
+b110110000 :!
+b110110000 =
+b110110000 *
+#1120000
+0!
+07
+#1125000
+1!
+17
+b110110100 :!
+b110110100 =
+b110110100 *
+#1130000
+0!
+07
+#1135000
+1!
+17
+b110111000 :!
+b110111000 =
+b110111000 *
+#1140000
+0!
+07
+#1145000
+1!
+17
+b110111100 :!
+b110111100 =
+b110111100 *
+#1150000
+0!
+07
+#1155000
+1!
+17
+b111000000 :!
+b111000000 =
+b111000000 *
+#1160000
+0!
+07
+#1165000
+1!
+17
+b111000100 :!
+b111000100 =
+b111000100 *
+#1170000
+0!
+07
+#1175000
+1!
+17
+b111001000 :!
+b111001000 =
+b111001000 *
+#1180000
+0!
+07
+#1185000
+1!
+17
+b111001100 :!
+b111001100 =
+b111001100 *
+#1190000
+0!
+07
+#1195000
+1!
+17
+b111010000 :!
+b111010000 =
+b111010000 *
+#1200000
+0!
+07
+#1205000
+1!
+17
+b111010100 :!
+b111010100 =
+b111010100 *
+#1210000
+0!
+07
+#1215000
+1!
+17
+b111011000 :!
+b111011000 =
+b111011000 *
+#1220000
+0!
+07
+#1225000
+1!
+17
+b111011100 :!
+b111011100 =
+b111011100 *
+#1230000
+0!
+07
+#1235000
+1!
+17
+b111100000 :!
+b111100000 =
+b111100000 *
+#1240000
+0!
+07
+#1245000
+1!
+17
+b111100100 :!
+b111100100 =
+b111100100 *
+#1250000
+0!
+07
+#1255000
+1!
+17
+b111101000 :!
+b111101000 =
+b111101000 *
+#1260000
+0!
+07
+#1265000
+1!
+17
+b111101100 :!
+b111101100 =
+b111101100 *
+#1270000
+0!
+07
+#1275000
+1!
+17
+b111110000 :!
+b111110000 =
+b111110000 *
+#1280000
+0!
+07
+#1285000
+1!
+17
+b111110100 :!
+b111110100 =
+b111110100 *
+#1290000
+0!
+07
+#1295000
+1!
+17
+b111111000 :!
+b111111000 =
+b111111000 *
+#1300000
+0!
+07
+#1305000
+1!
+17
+b111111100 :!
+b111111100 =
+b111111100 *
+#1310000
+0!
+07
+#1315000
+1!
+17
+b1000000000 :!
+b1000000000 =
+b1000000000 *
+#1320000
+0!
+07
+#1325000
+1!
+17
+b1000000100 :!
+b1000000100 =
+b1000000100 *
+#1330000
+0!
+07
+#1335000
+1!
+17
+b1000001000 :!
+b1000001000 =
+b1000001000 *
+#1340000
+0!
+07
+#1345000
+1!
+17
+b1000001100 :!
+b1000001100 =
+b1000001100 *
+#1350000
+0!
+07
+#1355000
+1!
+17
+b1000010000 :!
+b1000010000 =
+b1000010000 *
+#1360000
+0!
+07
+#1365000
+1!
+17
+b1000010100 :!
+b1000010100 =
+b1000010100 *
+#1370000
+0!
+07
+#1375000
+1!
+17
+b1000011000 :!
+b1000011000 =
+b1000011000 *
+#1380000
+0!
+07
+#1385000
+1!
+17
+b1000011100 :!
+b1000011100 =
+b1000011100 *
+#1390000
+0!
+07
+#1395000
+1!
+17
+b1000100000 :!
+b1000100000 =
+b1000100000 *
+#1400000
+0!
+07
+#1405000
+1!
+17
+b1000100100 :!
+b1000100100 =
+b1000100100 *
+#1410000
+0!
+07
+#1415000
+1!
+17
+b1000101000 :!
+b1000101000 =
+b1000101000 *
+#1420000
+0!
+07
+#1425000
+1!
+17
+b1000101100 :!
+b1000101100 =
+b1000101100 *
+#1430000
+0!
+07
+#1435000
+1!
+17
+b1000110000 :!
+b1000110000 =
+b1000110000 *
+#1440000
+0!
+07
+#1445000
+1!
+17
+b1000110100 :!
+b1000110100 =
+b1000110100 *
+#1450000
+0!
+07
+#1455000
+1!
+17
+b1000111000 :!
+b1000111000 =
+b1000111000 *
+#1460000
+0!
+07
+#1465000
+1!
+17
+b1000111100 :!
+b1000111100 =
+b1000111100 *
+#1470000
+0!
+07
+#1475000
+1!
+17
+b1001000000 :!
+b1001000000 =
+b1001000000 *
+#1480000
+0!
+07
+#1485000
+1!
+17
+b1001000100 :!
+b1001000100 =
+b1001000100 *
+#1490000
+0!
+07
+#1495000
+1!
+17
+b1001001000 :!
+b1001001000 =
+b1001001000 *
+#1500000
+0!
+07
+#1505000
+1!
+17
+b1001001100 :!
+b1001001100 =
+b1001001100 *
+#1510000
+0!
+07
+#1515000
+1!
+17
+b1001010000 :!
+b1001010000 =
+b1001010000 *
+#1520000
+0!
+07
+#1525000
+1!
+17
+b1001010100 :!
+b1001010100 =
+b1001010100 *
+#1530000
+0!
+07
+#1535000
+1!
+17
+b1001011000 :!
+b1001011000 =
+b1001011000 *
+#1540000
+0!
+07
+#1545000
+1!
+17
+b1001011100 :!
+b1001011100 =
+b1001011100 *
+#1550000
+0!
+07
+#1555000
+1!
+17
+b1001100000 :!
+b1001100000 =
+b1001100000 *
+#1560000
+0!
+07
+#1565000
+1!
+17
+b1001100100 :!
+b1001100100 =
+b1001100100 *
+#1570000
+0!
+07
+#1575000
+1!
+17
+b1001101000 :!
+b1001101000 =
+b1001101000 *
+#1580000
+0!
+07
+#1585000
+1!
+17
+b1001101100 :!
+b1001101100 =
+b1001101100 *
+#1590000
+0!
+07
+#1595000
+1!
+17
+b1001110000 :!
+b1001110000 =
+b1001110000 *
+#1600000
+0!
+07
+#1605000
+1!
+17
+b1001110100 :!
+b1001110100 =
+b1001110100 *
+#1610000
+0!
+07
+#1615000
+1!
+17
+b1001111000 :!
+b1001111000 =
+b1001111000 *
+#1620000
+0!
+07
+#1625000
+1!
+17
+b1001111100 :!
+b1001111100 =
+b1001111100 *
+#1630000
+0!
+07
+#1635000
+1!
+17
+b1010000000 :!
+b1010000000 =
+b1010000000 *
+#1640000
+0!
+07
+#1645000
+1!
+17
+b1010000100 :!
+b1010000100 =
+b1010000100 *
+#1650000
+0!
+07
+#1655000
+1!
+17
+b1010001000 :!
+b1010001000 =
+b1010001000 *
+#1660000
+0!
+07
+#1665000
+1!
+17
+b1010001100 :!
+b1010001100 =
+b1010001100 *
+#1670000
+0!
+07
+#1675000
+1!
+17
+b1010010000 :!
+b1010010000 =
+b1010010000 *
+#1680000
+0!
+07
+#1685000
+1!
+17
+b1010010100 :!
+b1010010100 =
+b1010010100 *
+#1690000
+0!
+07
+#1695000
+1!
+17
+b1010011000 :!
+b1010011000 =
+b1010011000 *
+#1700000
+0!
+07
+#1705000
+1!
+17
+b1010011100 :!
+b1010011100 =
+b1010011100 *
+#1710000
+0!
+07
+#1715000
+1!
+17
+b1010100000 :!
+b1010100000 =
+b1010100000 *
+#1720000
+0!
+07
+#1725000
+1!
+17
+b1010100100 :!
+b1010100100 =
+b1010100100 *
+#1730000
+0!
+07
+#1735000
+1!
+17
+b1010101000 :!
+b1010101000 =
+b1010101000 *
+#1740000
+0!
+07
+#1745000
+1!
+17
+b1010101100 :!
+b1010101100 =
+b1010101100 *
+#1750000
+0!
+07
+#1755000
+1!
+17
+b1010110000 :!
+b1010110000 =
+b1010110000 *
+#1760000
+0!
+07
+#1765000
+1!
+17
+b1010110100 :!
+b1010110100 =
+b1010110100 *
+#1770000
+0!
+07
+#1775000
+1!
+17
+b1010111000 :!
+b1010111000 =
+b1010111000 *
+#1780000
+0!
+07
+#1785000
+1!
+17
+b1010111100 :!
+b1010111100 =
+b1010111100 *
+#1790000
+0!
+07
+#1795000
+1!
+17
+b1011000000 :!
+b1011000000 =
+b1011000000 *
+#1800000
+0!
+07
+#1805000
+1!
+17
+b1011000100 :!
+b1011000100 =
+b1011000100 *
+#1810000
+0!
+07
+#1815000
+1!
+17
+b1011001000 :!
+b1011001000 =
+b1011001000 *
+#1820000
+0!
+07
+#1825000
+1!
+17
+b1011001100 :!
+b1011001100 =
+b1011001100 *
+#1830000
+0!
+07
+#1835000
+1!
+17
+b1011010000 :!
+b1011010000 =
+b1011010000 *
+#1840000
+0!
+07
+#1845000
+1!
+17
+b1011010100 :!
+b1011010100 =
+b1011010100 *
+#1850000
+0!
+07
+#1855000
+1!
+17
+b1011011000 :!
+b1011011000 =
+b1011011000 *
+#1860000
+0!
+07
+#1865000
+1!
+17
+b1011011100 :!
+b1011011100 =
+b1011011100 *
+#1870000
+0!
+07
+#1875000
+1!
+17
+b1011100000 :!
+b1011100000 =
+b1011100000 *
+#1880000
+0!
+07
+#1885000
+1!
+17
+b1011100100 :!
+b1011100100 =
+b1011100100 *
+#1890000
+0!
+07
+#1895000
+1!
+17
+b1011101000 :!
+b1011101000 =
+b1011101000 *
+#1900000
+0!
+07
+#1905000
+1!
+17
+b1011101100 :!
+b1011101100 =
+b1011101100 *
+#1910000
+0!
+07
+#1915000
+1!
+17
+b1011110000 :!
+b1011110000 =
+b1011110000 *
+#1920000
+0!
+07
+#1925000
+1!
+17
+b1011110100 :!
+b1011110100 =
+b1011110100 *
+#1930000
+0!
+07
+#1935000
+1!
+17
+b1011111000 :!
+b1011111000 =
+b1011111000 *
+#1940000
+0!
+07
+#1945000
+1!
+17
+b1011111100 :!
+b1011111100 =
+b1011111100 *
+#1950000
+0!
+07
+#1955000
+1!
+17
+b1100000000 :!
+b1100000000 =
+b1100000000 *
+#1960000
+0!
+07
+#1965000
+1!
+17
+b1100000100 :!
+b1100000100 =
+b1100000100 *
+#1970000
+0!
+07
+#1975000
+1!
+17
+b1100001000 :!
+b1100001000 =
+b1100001000 *
+#1980000
+0!
+07
+#1985000
+1!
+17
+b1100001100 :!
+b1100001100 =
+b1100001100 *
+#1990000
+0!
+07
+#1995000
+1!
+17
+b1100010000 :!
+b1100010000 =
+b1100010000 *
+#2000000
+0!
+07
+#2005000
+1!
+17
+b1100010100 :!
+b1100010100 =
+b1100010100 *
+#2010000
+0!
+07
+#2015000
+1!
+17
+b1100011000 :!
+b1100011000 =
+b1100011000 *
+#2020000
+0!
+07
+#2025000
+1!
+17
+b1100011100 :!
+b1100011100 =
+b1100011100 *
+#2030000
+0!
+07
+#2035000
+1!
+17
+b1100100000 :!
+b1100100000 =
+b1100100000 *
+#2040000
+0!
+07
+#2045000
+1!

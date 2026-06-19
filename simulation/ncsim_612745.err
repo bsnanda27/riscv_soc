@@ -1,0 +1,58 @@
+csi-ncsim - CSI: Command line:
+ncsim
+    -gui
+    -cdslib /home/nanda/Documents/riscv32i_processor/risc_v_axi/simulation/cds.lib
+    -logfile ncsim.log
+    -errormax 15
+    -status
+    worklib.tb_axi_wrapper:module
+
+csi-ncsim - CSI: *F,INTERR: INTERNAL EXCEPTION
+Observed simulation time : 0 FS + 0
+-----------------------------------------------------------------
+The tool has encountered an unexpected condition and must exit.
+Contact Cadence Design Systems customer support about this
+problem and provide enough information to help us reproduce it,
+including the logfile that contains this error message.
+  TOOL:	ncsim(64)	15.20-s086
+  HOSTNAME: seceece04.sece.ac.in
+  OPERATING SYSTEM: Linux 4.18.0-553.104.1.el8_10.x86_64 #1 SMP Tue Feb 3 13:44:58 EST 2026 x86_64
+  MESSAGE: T(0): sv_seghandler - trapno -1 addr(0x3ff3a24)
+	Stream rts_xfer
+-----------------------------------------------------------------
+
+csi-ncsim - CSI: Cadence Support Investigation, recording details
+External Code in function: <unavailable> offset -65526
+External Code in function: <unavailable> offset -65536
+Simulator Snap Shot: gd (SSS_GD) in snapshot worklib.tb_axi_wrapper:module (SSS)
+External Code in function: <unavailable> offset -65534
+Verilog Syntax Tree: wire declaration (VST_D_WIRE) in module worklib.tb_axi_wrapper:module (VST)
+	File: /home/nanda/Documents/riscv32i_processor/risc_v_axi/tb_axi_wrapper.v, line 49, position 25
+	Scope: tb_axi_wrapper
+	Decompile: logic trap_taken
+	Source  :     wire        trap_taken;
+	Position:                          ^
+Verilog Syntax Tree: logic type (VST_T_LOGIC) in module worklib.tb_axi_wrapper:module (VST)
+	Decompile: logic
+Verilog Syntax Tree: module declaration (VST_D_MODULE) in module worklib.tb_axi_wrapper:module (VST)
+	File: /home/nanda/Documents/riscv32i_processor/risc_v_axi/tb_axi_wrapper.v, line 31, position 20
+	Scope: tb_axi_wrapper
+	Decompile: tb_axi_wrapper
+	Source  : module tb_axi_wrapper;
+	Position:                     ^
+External Code in function: <unavailable> offset 530
+Verilog Syntax Tree: wire declaration (VST_D_WIRE) in module worklib.tb_axi_wrapper:module (VST)
+	File: /home/nanda/Documents/riscv32i_processor/risc_v_axi/tb_axi_wrapper.v, line 48, position 27
+	Scope: tb_axi_wrapper
+	Decompile: logic br_taken_dbg
+	Source  :     wire        br_taken_dbg;
+	Position:                            ^
+Intermediate File: string (IF_STRING) in module worklib.tb_axi_wrapper:module (VST)
+	Decompile: trap_taken
+External Code in function: <unavailable> offset -64536
+Internal Code in function: nmpLibraryNTToIdent offset 64
+Internal Code in function: nmpLibraryNTToIdent offset 1266784908
+External Code in function: <unavailable> offset 262144
+External Code in function: <unavailable> offset -65452
+User Code in function: <unavailable> offset 34075560
+csi-ncsim - CSI: investigation complete took 0.004 secs, send this file to Cadence Support

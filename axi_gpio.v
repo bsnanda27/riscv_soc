@@ -1,153 +1,117 @@
-module axi_gpio #(
-    parameter ADDR_WIDTH = 32,
-    parameter DATA_WIDTH = 32
-)(
-    input                        aclk,
-    input                        aresetn,
+module axi_gpio
+(
+    input  wire        clk,
+    input  wire        rst,
 
-    // AXI4-Lite slave interface
-    // Write address
-    input      [ADDR_WIDTH-1:0]  S_AWADDR,
-    input                        S_AWVALID,
-    output reg                   S_AWREADY,
+    // AXI4-Lite Slave Interface
+    input  wire [31:0] awaddr,
+    input  wire        awvalid,
+    output reg         awready,
 
-    // Write data
-    input      [DATA_WIDTH-1:0]  S_WDATA,
-    input      [DATA_WIDTH/8-1:0] S_WSTRB,
-    input                        S_WVALID,
-    output reg                   S_WREADY,
+    input  wire [31:0] wdata,
+    input  wire [3:0]  wstrb,
+    input  wire        wvalid,
+    output reg         wready,
 
-    // Write response
-    output reg [1:0]             S_BRESP,
-    output reg                   S_BVALID,
-    input                        S_BREADY,
+    output reg [1:0]   bresp,
+    output reg         bvalid,
+    input  wire        bready,
 
-    // Read address
-    input      [ADDR_WIDTH-1:0]  S_ARADDR,
-    input                        S_ARVALID,
-    output reg                   S_ARREADY,
+    input  wire [31:0] araddr,
+    input  wire        arvalid,
+    output reg         arready,
 
-    // Read data
-    output reg [DATA_WIDTH-1:0]  S_RDATA,
-    output reg [1:0]             S_RRESP,
-    output reg                   S_RVALID,
-    input                        S_RREADY,
+    output reg [31:0]  rdata,
+    output reg [1:0]   rresp,
+    output reg         rvalid,
+    input  wire        rready,
 
-    // GPIO pins
-    input      [31:0]            gpio_in,
-    output reg [31:0]            gpio_out
+    input  wire [31:0] gpio_in,
+    output wire [31:0] gpio_out
 );
 
-    // Internal registers
     reg [31:0] gpio_out_reg;
+    reg [31:0] gpio_dir_reg;
 
-    // Address decode (word offsets)
-    wire [3:0] addr_word = S_AWVALID ? S_AWADDR[5:2] : S_ARADDR[5:2];
+    assign gpio_out = gpio_out_reg;
 
-    // ---------------- Write channel ----------------
-    typedef enum reg [1:0] {W_IDLE, W_DATA, W_RESP} w_state_t;
-    reg [1:0] w_state;
+    always @(posedge clk)
+    begin
+        if (rst)
+        begin
+            awready     <= 1'b0;
+            wready      <= 1'b0;
+            bvalid      <= 1'b0;
+            bresp       <= 2'b00;
 
-    always @(posedge aclk) begin
-        if (!aresetn) begin
-            w_state    <= W_IDLE;
-            S_AWREADY  <= 1'b0;
-            S_WREADY   <= 1'b0;
-            S_BVALID   <= 1'b0;
-            S_BRESP    <= 2'b00;
-            gpio_out_reg <= 32'h0000_0000;
-        end else begin
-            case (w_state)
-                W_IDLE: begin
-                    S_BVALID  <= 1'b0;
-                    S_AWREADY <= 1'b1;
-                    if (S_AWVALID && S_AWREADY) begin
-                        S_AWREADY <= 1'b0;
-                        S_WREADY  <= 1'b1;
-                        w_state   <= W_DATA;
-                    end
-                end
+            arready     <= 1'b0;
+            rvalid      <= 1'b0;
+            rresp       <= 2'b00;
+            rdata       <= 32'b0;
 
-                W_DATA: begin
-                    if (S_WVALID && S_WREADY) begin
-                        // Decode write address
-                        case (addr_word)
-                            4'h0: begin
-                                // GPIO_OUT register
-                                if (S_WSTRB[0]) gpio_out_reg[7:0]   <= S_WDATA[7:0];
-                                if (S_WSTRB[1]) gpio_out_reg[15:8]  <= S_WDATA[15:8];
-                                if (S_WSTRB[2]) gpio_out_reg[23:16] <= S_WDATA[23:16];
-                                if (S_WSTRB[3]) gpio_out_reg[31:24] <= S_WDATA[31:24];
-                            end
-                            default: ;
-                        endcase
-
-                        S_WREADY <= 1'b0;
-                        S_BRESP  <= 2'b00;   // OKAY
-                        S_BVALID <= 1'b1;
-                        w_state  <= W_RESP;
-                    end
-                end
-
-                W_RESP: begin
-                    if (S_BREADY && S_BVALID) begin
-                        S_BVALID <= 1'b0;
-                        w_state  <= W_IDLE;
-                    end
-                end
-
-                default: w_state <= W_IDLE;
-            endcase
+            gpio_out_reg <= 32'b0;
+            gpio_dir_reg <= 32'b0;
         end
-    end
-
-    // Drive GPIO output
-    always @(posedge aclk) begin
-        if (!aresetn)
-            gpio_out <= 32'h0;
         else
-            gpio_out <= gpio_out_reg;
-    end
+        begin
+            awready <= 1'b0;
+            wready  <= 1'b0;
+            arready <= 1'b0;
 
-    // ---------------- Read channel ----------------
-    typedef enum reg [1:0] {R_IDLE, R_DATA} r_state_t;
-    reg [1:0] r_state;
+            if (awvalid && wvalid && !bvalid)
+            begin
+                awready <= 1'b1;
+                wready  <= 1'b1;
 
-    always @(posedge aclk) begin
-        if (!aresetn) begin
-            r_state   <= R_IDLE;
-            S_ARREADY <= 1'b0;
-            S_RVALID  <= 1'b0;
-            S_RRESP   <= 2'b00;
-            S_RDATA   <= {DATA_WIDTH{1'b0}};
-        end else begin
-            case (r_state)
-                R_IDLE: begin
-                    S_RVALID  <= 1'b0;
-                    S_ARREADY <= 1'b1;
-                    if (S_ARVALID && S_ARREADY) begin
-                        S_ARREADY <= 1'b0;
-                        // Decode read address
-                        case (S_ARADDR[5:2])
-                            4'h0: S_RDATA <= gpio_out_reg;  // GPIO_OUT
-                            4'h1: S_RDATA <= gpio_in;       // GPIO_IN
-                            default: S_RDATA <= 32'hDEAD_BEEF;
-                        endcase
-                        S_RRESP  <= 2'b00; // OKAY
-                        S_RVALID <= 1'b1;
-                        r_state  <= R_DATA;
+                case (awaddr[5:2])
+                    4'h0:
+                    begin
+                        if (wstrb[0]) gpio_out_reg[7:0]   <= wdata[7:0];
+                        if (wstrb[1]) gpio_out_reg[15:8]  <= wdata[15:8];
+                        if (wstrb[2]) gpio_out_reg[23:16] <= wdata[23:16];
+                        if (wstrb[3]) gpio_out_reg[31:24] <= wdata[31:24];
                     end
-                end
 
-                R_DATA: begin
-                    if (S_RVALID && S_RREADY) begin
-                        S_RVALID <= 1'b0;
-                        r_state  <= R_IDLE;
+                    4'h1:
+                    begin
+                        if (wstrb[0]) gpio_dir_reg[7:0]   <= wdata[7:0];
+                        if (wstrb[1]) gpio_dir_reg[15:8]  <= wdata[15:8];
+                        if (wstrb[2]) gpio_dir_reg[23:16] <= wdata[23:16];
+                        if (wstrb[3]) gpio_dir_reg[31:24] <= wdata[31:24];
                     end
-                end
 
-                default: r_state <= R_IDLE;
-            endcase
+                    default:
+                    begin
+                    end
+                endcase
+
+                bvalid <= 1'b1;
+                bresp  <= 2'b00;
+            end
+
+            if (bvalid && bready)
+            begin
+                bvalid <= 1'b0;
+            end
+
+            if (arvalid && !rvalid)
+            begin
+                arready <= 1'b1;
+                rvalid  <= 1'b1;
+                rresp   <= 2'b00;
+
+                case (araddr[5:2])
+                    4'h0: rdata <= gpio_out_reg;
+                    4'h1: rdata <= gpio_dir_reg;
+                    4'h2: rdata <= gpio_in;
+                    default: rdata <= 32'b0;
+                endcase
+            end
+
+            if (rvalid && rready)
+            begin
+                rvalid <= 1'b0;
+            end
         end
     end
 

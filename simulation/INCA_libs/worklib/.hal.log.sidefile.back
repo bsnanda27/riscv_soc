@@ -1,8 +1,5 @@
 halsynth: Loading design snapshot....
 halsynth: Traversing design hierarchy....
-halsynth: *M,_SCOPE: tb_axi_soc.dut.processor_i.timer_i
-halsynth: *W,MULNBA (../timer.v,18|0): In module 'timer', register 'timer_counter' has multiple non-blocking assignments to same parts.
-halsynth: (../timer.v,20|0): Source HDL information for the error/warning mentioned above.
 halsynth: *M,_SCOPE: tb_axi_soc.dut.processor_i.reg_file_i
 halsynth: *W,VLGMEM (../reg_file.v,15|0): Module reg_file has Verilog memories. For large memories, processing may take some time.
 halsynth: *M,_SCOPE: tb_axi_soc.dut.processor_i.controller_i
@@ -119,79 +116,72 @@ halsynth: (../alu.v,28|0): Source HDL information for the error/warning mentione
 halsynth: (../alu.v,29|0): Source HDL information for the error/warning mentioned above.
 halsynth: *M,_SCOPE: tb_axi_soc.dut.processor_i.csr_reg_i
 halsynth: *W,VLGMEM (../csr_reg.v,18|0): Module csr_reg has Verilog memories. For large memories, processing may take some time.
-halsynth: *M,_SCOPE: tb_axi_soc.dut.processor_i
-halsynth: *W,UNDRIV (../processor.v,14|0): Primary output/inout 'imem_addr'  is not driven in the module 'processor'.
-@:imem_addr 
-halsynth: *W,MULWIR (../processor.v,26|0): Module 'processor' has wire 'mem_addr[31:0]' multi-driven.
-halsynth: (../processor.v,519|0): Source HDL information for the error/warning mentioned above.
-@:mem_addr 
-halsynth: *W,MULWIR (../processor.v,27|0): Module 'processor' has wire 'mem_wdata[31:0]' multi-driven.
-halsynth: (../processor.v,520|0): Source HDL information for the error/warning mentioned above.
-@:mem_wdata 
 halsynth: *M,_SCOPE: tb_axi_soc.dut.axi_master_i
-halsynth: *W,MULNBA (../rv32i_axi_master.v,138|0): In module 'rv32i_axi_master', register 'M_AXI_AWVALID' has multiple non-blocking assignments.
-halsynth: (../rv32i_axi_master.v,153|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,MULNBA (../rv32i_axi_master.v,145|0): In module 'rv32i_axi_master', register 'M_AXI_WVALID' has multiple non-blocking assignments.
-halsynth: (../rv32i_axi_master.v,154|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,MULNBA (../rv32i_axi_master.v,139|0): In module 'rv32i_axi_master', register 'aw_done' has multiple non-blocking assignments.
+halsynth: *W,MULNBA (../rv32i_axi_master.v,107|0): In module 'rv32i_axi_master', register 'M_AXI_AWVALID' has multiple non-blocking assignments.
+halsynth: (../rv32i_axi_master.v,112|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,MULNBA (../rv32i_axi_master.v,108|0): In module 'rv32i_axi_master', register 'M_AXI_WVALID' has multiple non-blocking assignments.
+halsynth: (../rv32i_axi_master.v,113|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,MULNBA (../rv32i_axi_master.v,76|0): In module 'rv32i_axi_master', register 'dmem_done' has multiple non-blocking assignments.
+halsynth: (../rv32i_axi_master.v,122|0): Source HDL information for the error/warning mentioned above.
+halsynth: (../rv32i_axi_master.v,139|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,MULNBA (../rv32i_axi_master.v,75|0): In module 'rv32i_axi_master', register 'imem_done' has multiple non-blocking assignments.
 halsynth: (../rv32i_axi_master.v,156|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,MULNBA (../rv32i_axi_master.v,146|0): In module 'rv32i_axi_master', register 'w_done' has multiple non-blocking assignments.
+halsynth: *N,FSMIDN (../rv32i_axi_master.v,79|0): In module/design-unit 'rv32i_axi_master', FSM for state register 'state' has been recognized.
+halsynth: *W,BADFSM (../rv32i_axi_master.v,65|0): In module/design-unit 'rv32i_axi_master', FSM for state register 'state' does not adhere to modeling style guidelines.
+halsynth: *W,TRNMBT (../rv32i_axi_master.v,80|0): For the specified state '0', the state value changes by more than one bits on transition to state(s): 3, 5.
+halsynth: (../rv32i_axi_master.v,96|0): Source HDL information for the error/warning mentioned above.
+halsynth: (../rv32i_axi_master.v,101|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,TRNMBT (../rv32i_axi_master.v,106|0): For the specified state '1', the state value changes by more than one bits on transition to state(s): 2.
+halsynth: (../rv32i_axi_master.v,115|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,TRNMBT (../rv32i_axi_master.v,127|0): For the specified state '3', the state value changes by more than one bits on transition to state(s): 4.
+halsynth: (../rv32i_axi_master.v,131|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,TRNMBT (../rv32i_axi_master.v,144|0): For the specified state '5', the state value changes by more than one bits on transition to state(s): 6.
+halsynth: (../rv32i_axi_master.v,148|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,TRNMBT (../rv32i_axi_master.v,152|0): For the specified state '6', the state value changes by more than one bits on transition to state(s): 0.
 halsynth: (../rv32i_axi_master.v,157|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,MULNBA (../rv32i_axi_master.v,89|0): In module 'rv32i_axi_master', register 'mem_ready' has multiple non-blocking assignments.
-halsynth: (../rv32i_axi_master.v,171|0): Source HDL information for the error/warning mentioned above.
-halsynth: (../rv32i_axi_master.v,233|0): Source HDL information for the error/warning mentioned above.
-halsynth: (../rv32i_axi_master.v,235|0): Source HDL information for the error/warning mentioned above.
-halsynth: *N,FSMIDN (../rv32i_axi_master.v,91|0): In module/design-unit 'rv32i_axi_master', FSM for state register 'state' has been recognized.
-halsynth: *W,BADFSM (../rv32i_axi_master.v,61|0): In module/design-unit 'rv32i_axi_master', FSM for state register 'state' does not adhere to modeling style guidelines.
-halsynth: *W,TRNMBT (../rv32i_axi_master.v,97|0): For the specified state '0', the state value changes by more than one bits on transition to state(s): 3.
-halsynth: (../rv32i_axi_master.v,124|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,TRNMBT (../rv32i_axi_master.v,133|0): For the specified state '1', the state value changes by more than one bits on transition to state(s): 2.
-halsynth: (../rv32i_axi_master.v,158|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,TRNMBT (../rv32i_axi_master.v,199|0): For the specified state '3', the state value changes by more than one bits on transition to state(s): 4.
-halsynth: (../rv32i_axi_master.v,205|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,EXTFSM (../rv32i_axi_master.v,5|0): Extraneous logic present in module/design-unit 'rv32i_axi_master' that encodes an FSM.
+halsynth: *W,EXTFSM (../rv32i_axi_master.v,2|0): Extraneous logic present in module/design-unit 'rv32i_axi_master' that encodes an FSM.
 halsynth: *M,_SCOPE: tb_axi_soc.dut.ram_i
-halsynth: *W,VLGMEM (../axi_ram.v,43|0): Module axi_ram has Verilog memories. For large memories, processing may take some time.
-halsynth: *W,MULNBA (../axi_ram.v,72|0): In module 'axi_ram', register 'awready' has multiple non-blocking assignments.
+halsynth: *W,VLGMEM (../axi_ram.v,42|0): Module axi_ram has Verilog memories. For large memories, processing may take some time.
+halsynth: *W,MULNBA (../axi_ram.v,71|0): In module 'axi_ram', register 'awready' has multiple non-blocking assignments.
+halsynth: (../axi_ram.v,81|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,MULNBA (../axi_ram.v,72|0): In module 'axi_ram', register 'wready' has multiple non-blocking assignments.
 halsynth: (../axi_ram.v,82|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,MULNBA (../axi_ram.v,73|0): In module 'axi_ram', register 'wready' has multiple non-blocking assignments.
-halsynth: (../axi_ram.v,83|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,MULNBA (../axi_ram.v,97|0): In module 'axi_ram', register 'bvalid' has multiple non-blocking assignments.
-halsynth: (../axi_ram.v,103|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,MULNBA (../axi_ram.v,74|0): In module 'axi_ram', register 'arready' has multiple non-blocking assignments.
-halsynth: (../axi_ram.v,112|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,MULNBA (../axi_ram.v,116|0): In module 'axi_ram', register 'rvalid' has multiple non-blocking assignments.
-halsynth: (../axi_ram.v,121|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,MULNBA (../axi_ram.v,96|0): In module 'axi_ram', register 'bvalid' has multiple non-blocking assignments.
+halsynth: (../axi_ram.v,102|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,MULNBA (../axi_ram.v,73|0): In module 'axi_ram', register 'arready' has multiple non-blocking assignments.
+halsynth: (../axi_ram.v,111|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,MULNBA (../axi_ram.v,115|0): In module 'axi_ram', register 'rvalid' has multiple non-blocking assignments.
+halsynth: (../axi_ram.v,120|0): Source HDL information for the error/warning mentioned above.
 halsynth: *M,_SCOPE: tb_axi_soc.dut.gpio_i
-halsynth: *W,MULNBA (../axi_gpio.v,58|0): In module 'axi_gpio', register 'awready' has multiple non-blocking assignments.
+halsynth: *W,MULNBA (../axi_gpio.v,57|0): In module 'axi_gpio', register 'awready' has multiple non-blocking assignments.
+halsynth: (../axi_gpio.v,63|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,MULNBA (../axi_gpio.v,58|0): In module 'axi_gpio', register 'wready' has multiple non-blocking assignments.
 halsynth: (../axi_gpio.v,64|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,MULNBA (../axi_gpio.v,59|0): In module 'axi_gpio', register 'wready' has multiple non-blocking assignments.
-halsynth: (../axi_gpio.v,65|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,MULNBA (../axi_gpio.v,89|0): In module 'axi_gpio', register 'bvalid' has multiple non-blocking assignments.
-halsynth: (../axi_gpio.v,95|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,MULNBA (../axi_gpio.v,60|0): In module 'axi_gpio', register 'arready' has multiple non-blocking assignments.
-halsynth: (../axi_gpio.v,100|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,MULNBA (../axi_gpio.v,101|0): In module 'axi_gpio', register 'rvalid' has multiple non-blocking assignments.
-halsynth: (../axi_gpio.v,114|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,MULNBA (../axi_gpio.v,88|0): In module 'axi_gpio', register 'bvalid' has multiple non-blocking assignments.
+halsynth: (../axi_gpio.v,94|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,MULNBA (../axi_gpio.v,59|0): In module 'axi_gpio', register 'arready' has multiple non-blocking assignments.
+halsynth: (../axi_gpio.v,99|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,MULNBA (../axi_gpio.v,100|0): In module 'axi_gpio', register 'rvalid' has multiple non-blocking assignments.
+halsynth: (../axi_gpio.v,113|0): Source HDL information for the error/warning mentioned above.
 halsynth: *M,_SCOPE: tb_axi_soc.dut.spi_i
-halsynth: *W,MULNBA (../axi_spi.v,82|0): In module 'axi_spi', register 'awready' has multiple non-blocking assignments.
+halsynth: *W,MULNBA (../axi_spi.v,81|0): In module 'axi_spi', register 'awready' has multiple non-blocking assignments.
+halsynth: (../axi_spi.v,90|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,MULNBA (../axi_spi.v,82|0): In module 'axi_spi', register 'wready' has multiple non-blocking assignments.
 halsynth: (../axi_spi.v,91|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,MULNBA (../axi_spi.v,83|0): In module 'axi_spi', register 'wready' has multiple non-blocking assignments.
-halsynth: (../axi_spi.v,92|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,MULNBA (../axi_spi.v,113|0): In module 'axi_spi', register 'bvalid' has multiple non-blocking assignments.
-halsynth: (../axi_spi.v,119|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,MULNBA (../axi_spi.v,84|0): In module 'axi_spi', register 'arready' has multiple non-blocking assignments.
-halsynth: (../axi_spi.v,124|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,MULNBA (../axi_spi.v,125|0): In module 'axi_spi', register 'rvalid' has multiple non-blocking assignments.
-halsynth: (../axi_spi.v,139|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,MULNBA (../axi_spi.v,155|0): In module 'axi_spi', register 'sclk_reg' has multiple non-blocking assignments.
-halsynth: (../axi_spi.v,169|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,MULNBA (../axi_spi.v,100|0): In module 'axi_spi', register 'ctrl_reg' has multiple non-blocking assignments to same parts.
-halsynth: (../axi_spi.v,99|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,MULNBA (../axi_spi.v,112|0): In module 'axi_spi', register 'bvalid' has multiple non-blocking assignments.
+halsynth: (../axi_spi.v,118|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,MULNBA (../axi_spi.v,83|0): In module 'axi_spi', register 'arready' has multiple non-blocking assignments.
+halsynth: (../axi_spi.v,123|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,MULNBA (../axi_spi.v,124|0): In module 'axi_spi', register 'rvalid' has multiple non-blocking assignments.
+halsynth: (../axi_spi.v,138|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,MULNBA (../axi_spi.v,154|0): In module 'axi_spi', register 'sclk_reg' has multiple non-blocking assignments.
+halsynth: (../axi_spi.v,168|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,MULNBA (../axi_spi.v,99|0): In module 'axi_spi', register 'ctrl_reg' has multiple non-blocking assignments to same parts.
 halsynth: (../axi_spi.v,98|0): Source HDL information for the error/warning mentioned above.
 halsynth: (../axi_spi.v,97|0): Source HDL information for the error/warning mentioned above.
-halsynth: (../axi_spi.v,171|0): Source HDL information for the error/warning mentioned above.
-halsynth: *W,MULNBA (../axi_spi.v,87|0): In module 'axi_spi', register 'status_reg' has multiple non-blocking assignments to same parts.
+halsynth: (../axi_spi.v,96|0): Source HDL information for the error/warning mentioned above.
+halsynth: (../axi_spi.v,170|0): Source HDL information for the error/warning mentioned above.
+halsynth: *W,MULNBA (../axi_spi.v,86|0): In module 'axi_spi', register 'status_reg' has multiple non-blocking assignments to same parts.
 halsynth: *M,_SCOPE: tb_axi_soc
 halsynth: *W,INIUSP (../tb_axi_soc.v,35|0): Module tb_axi_soc has an initial block or a variable declaration assignment, which is ignored by synthesis tools.
 halsynth: *W,INIUSP (../tb_axi_soc.v,41|0): Module tb_axi_soc has an initial block or a variable declaration assignment, which is ignored by synthesis tools.
@@ -199,7 +189,7 @@ halsynth: *W,INIUSP (../tb_axi_soc.v,96|0): Module tb_axi_soc has an initial blo
 halsynth: *W,INIUSP (../tb_axi_soc.v,130|0): Module tb_axi_soc has an initial block or a variable declaration assignment, which is ignored by synthesis tools.
 halsynth: *W,INIUSP (../tb_axi_soc.v,137|0): Module tb_axi_soc has an initial block or a variable declaration assignment, which is ignored by synthesis tools.
 halsynth: *N,AUTOBX: Design contains automatically blackboxed design units/memories.
-halsynth: (../axi_ram.v,43): Memory 'mem', in design-unit 'axi_ram', is automatically blackboxed.
+halsynth: (../axi_ram.v,42): Memory 'mem', in design-unit 'axi_ram', is automatically blackboxed.
 ~:CLKOUT
 ~:CLKSRD
 ~:COMBLP
@@ -208,4 +198,4 @@ halsynth: (../axi_ram.v,43): Memory 'mem', in design-unit 'axi_ram', is automati
 ~:MULWIR
 ~:UNDRIV
 halsynth: Total errors   = 0.
-halsynth: Total warnings = 52.
+halsynth: Total warnings = 49.

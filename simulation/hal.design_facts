@@ -22,7 +22,7 @@ Design facts for top module: tb_axi_soc
                                             Number Of single-bit
      Internal signal                  : Flipflops/latches controlled
      -------------                      ----------------------------
-     tb_axi_soc.dut.clk               : 1994 FFs
+     tb_axi_soc.dut.clk               : 1946 FFs
 
   4. Primary inputs used as async
      set/reset
@@ -51,8 +51,8 @@ Design facts for the complete design:
 
   1. Number of tops in hierarchy : 1
 
-  2. Number of single-bit flip-flops in hierarchy : 1949
-    -- (i)  Number of single-bit D flip-flops in hierarchy : 1949
+  2. Number of single-bit flip-flops in hierarchy : 1946
+    -- (i)  Number of single-bit D flip-flops in hierarchy : 1946
     -- (ii) Number of single-bit JK flip-flops in hierarchy : 0
 
   3. Number of single-bit latches in hierarchy : 0

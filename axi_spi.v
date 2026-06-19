@@ -1,211 +1,185 @@
-module axi_spi #(
-    parameter ADDR_WIDTH = 32,
-    parameter DATA_WIDTH = 32
-)(
-    input                        aclk,
-    input                        aresetn,
+module axi_spi
+(
+    input  wire        clk,
+    input  wire        rst,
 
-    // AXI4-Lite slave
-    input      [ADDR_WIDTH-1:0]  S_AWADDR,
-    input                        S_AWVALID,
-    output reg                   S_AWREADY,
+    // AXI4-Lite Slave Interface
+    input  wire [31:0] awaddr,
+    input  wire        awvalid,
+    output reg         awready,
 
-    input      [DATA_WIDTH-1:0]  S_WDATA,
-    input      [DATA_WIDTH/8-1:0] S_WSTRB,
-    input                        S_WVALID,
-    output reg                   S_WREADY,
+    input  wire [31:0] wdata,
+    input  wire [3:0]  wstrb,
+    input  wire        wvalid,
+    output reg         wready,
 
-    output reg [1:0]             S_BRESP,
-    output reg                   S_BVALID,
-    input                        S_BREADY,
+    output reg [1:0]   bresp,
+    output reg         bvalid,
+    input  wire        bready,
 
-    input      [ADDR_WIDTH-1:0]  S_ARADDR,
-    input                        S_ARVALID,
-    output reg                   S_ARREADY,
+    input  wire [31:0] araddr,
+    input  wire        arvalid,
+    output reg         arready,
 
-    output reg [DATA_WIDTH-1:0]  S_RDATA,
-    output reg [1:0]             S_RRESP,
-    output reg                   S_RVALID,
-    input                        S_RREADY,
+    output reg [31:0]  rdata,
+    output reg [1:0]   rresp,
+    output reg         rvalid,
+    input  wire        rready,
 
-    // SPI pins
-    output reg                   spi_sck,
-    output reg                   spi_mosi,
-    input                        spi_miso,
-    output reg                   spi_cs_n
+    output wire        spi_sclk,
+    output wire        spi_mosi,
+    input  wire        spi_miso,
+    output wire        spi_cs
 );
 
-    // Registers
-    reg [31:0] ctrl_reg;    // bit0: en, bit1: CPOL, bit2: CPHA, bits7:4: div, bit8: start
-    reg [31:0] tx_reg;
-    reg [31:0] rx_reg;
-    reg [31:0] status_reg;  // bit0: busy, bit1: done
+    reg [31:0] ctrl_reg;
+    reg [31:0] status_reg;
+    reg [7:0]  tx_reg;
+    reg [7:0]  rx_reg;
 
-    // Internal SPI engine
-    reg [7:0]  bit_cnt;
-    reg [7:0]  clk_div_cnt;
-    reg        spi_clk_en;
-    reg        spi_busy;
-    reg        spi_done;
-    reg [7:0]  shift_tx;
-    reg [7:0]  shift_rx;
+    reg [7:0]  shift_reg;
+    reg [2:0]  bit_cnt;
+    reg        busy;
+    reg        sclk_reg;
+    reg        mosi_reg;
+    reg        cs_reg;
+    reg        start_d;
 
-    wire       ctrl_en   = ctrl_reg[0];
-    wire       ctrl_cpol = ctrl_reg[1];
-    wire       ctrl_cpha = ctrl_reg[2];
-    wire [3:0] ctrl_div  = ctrl_reg[7:4];
-    wire       ctrl_start= ctrl_reg[8];
+    assign spi_sclk = sclk_reg;
+    assign spi_mosi = mosi_reg;
+    assign spi_cs   = cs_reg;
 
-    // ---------------- AXI write channel ----------------
-    typedef enum reg [1:0] {W_IDLE, W_DATA, W_RESP} w_state_t;
-    reg [1:0] w_state;
+    always @(posedge clk)
+    begin
+        if (rst)
+        begin
+            awready    <= 1'b0;
+            wready     <= 1'b0;
+            bvalid     <= 1'b0;
+            bresp      <= 2'b00;
 
-    reg [ADDR_WIDTH-1:0] awaddr_latched;
+            arready    <= 1'b0;
+            rvalid     <= 1'b0;
+            rresp      <= 2'b00;
+            rdata      <= 32'b0;
 
-    always @(posedge aclk) begin
-        if (!aresetn) begin
-            w_state       <= W_IDLE;
-            S_AWREADY     <= 1'b0;
-            S_WREADY      <= 1'b0;
-            S_BVALID      <= 1'b0;
-            S_BRESP       <= 2'b00;
-            ctrl_reg      <= 32'h0;
-            tx_reg        <= 32'h0;
-        end else begin
-            case (w_state)
-                W_IDLE: begin
-                    S_BVALID  <= 1'b0;
-                    S_AWREADY <= 1'b1;
-                    if (S_AWVALID && S_AWREADY) begin
-                        awaddr_latched <= S_AWADDR;
-                        S_AWREADY      <= 1'b0;
-                        S_WREADY       <= 1'b1;
-                        w_state        <= W_DATA;
-                    end
-                end
+            ctrl_reg   <= 32'b0;
+            status_reg <= 32'b0;
+            tx_reg     <= 8'b0;
+            rx_reg     <= 8'b0;
 
-                W_DATA: begin
-                    if (S_WVALID && S_WREADY) begin
-                        case (awaddr_latched[5:2])
-                            4'h0: ctrl_reg <= S_WDATA;  // CTRL
-                            4'h1: tx_reg   <= S_WDATA;  // TXDATA
-                            default: ;
-                        endcase
-                        S_WREADY <= 1'b0;
-                        S_BRESP  <= 2'b00;
-                        S_BVALID <= 1'b1;
-                        w_state  <= W_RESP;
-                    end
-                end
-
-                W_RESP: begin
-                    if (S_BREADY && S_BVALID) begin
-                        S_BVALID <= 1'b0;
-                        w_state  <= W_IDLE;
-                    end
-                end
-
-                default: w_state <= W_IDLE;
-            endcase
+            shift_reg  <= 8'b0;
+            bit_cnt    <= 3'b0;
+            busy       <= 1'b0;
+            sclk_reg   <= 1'b0;
+            mosi_reg   <= 1'b0;
+            cs_reg     <= 1'b1;
+            start_d    <= 1'b0;
         end
-    end
+        else
+        begin
+            awready <= 1'b0;
+            wready  <= 1'b0;
+            arready <= 1'b0;
 
-    // ---------------- AXI read channel ----------------
-    typedef enum reg [1:0] {R_IDLE, R_DATA} r_state_t;
-    reg [1:0] r_state;
-    reg [ADDR_WIDTH-1:0] araddr_latched;
+            status_reg[0] <= busy;
+            status_reg[1] <= 1'b0;
 
-    always @(posedge aclk) begin
-        if (!aresetn) begin
-            r_state   <= R_IDLE;
-            S_ARREADY <= 1'b0;
-            S_RVALID  <= 1'b0;
-            S_RRESP   <= 2'b00;
-            S_RDATA   <= 32'h0;
-        end else begin
-            case (r_state)
-                R_IDLE: begin
-                    S_RVALID  <= 1'b0;
-                    S_ARREADY <= 1'b1;
-                    if (S_ARVALID && S_ARREADY) begin
-                        araddr_latched <= S_ARADDR;
-                        S_ARREADY      <= 1'b0;
-                        case (S_ARADDR[5:2])
-                            4'h0: S_RDATA <= ctrl_reg;                  // CTRL
-                            4'h1: S_RDATA <= tx_reg;                    // TXDATA
-                            4'h2: S_RDATA <= rx_reg;                    // RXDATA
-                            4'h3: S_RDATA <= {30'h0, spi_done, spi_busy}; // STATUS
-                            default: S_RDATA <= 32'hDEAD_BEEF;
-                        endcase
-                        S_RRESP  <= 2'b00;
-                        S_RVALID <= 1'b1;
-                        r_state  <= R_DATA;
+            if (awvalid && wvalid && !bvalid)
+            begin
+                awready <= 1'b1;
+                wready  <= 1'b1;
+
+                case (awaddr[5:2])
+                    4'h0:
+                    begin
+                        if (wstrb[0]) ctrl_reg[7:0]   <= wdata[7:0];
+                        if (wstrb[1]) ctrl_reg[15:8]  <= wdata[15:8];
+                        if (wstrb[2]) ctrl_reg[23:16] <= wdata[23:16];
+                        if (wstrb[3]) ctrl_reg[31:24] <= wdata[31:24];
+                    end
+
+                    4'h2:
+                    begin
+                        if (wstrb[0]) tx_reg <= wdata[7:0];
+                    end
+
+                    default:
+                    begin
+                    end
+                endcase
+
+                bvalid <= 1'b1;
+                bresp  <= 2'b00;
+            end
+
+            if (bvalid && bready)
+            begin
+                bvalid <= 1'b0;
+            end
+
+            if (arvalid && !rvalid)
+            begin
+                arready <= 1'b1;
+                rvalid  <= 1'b1;
+                rresp   <= 2'b00;
+
+                case (araddr[5:2])
+                    4'h0: rdata <= ctrl_reg;
+                    4'h1: rdata <= status_reg;
+                    4'h2: rdata <= {24'b0, tx_reg};
+                    4'h3: rdata <= {24'b0, rx_reg};
+                    default: rdata <= 32'b0;
+                endcase
+            end
+
+            if (rvalid && rready)
+            begin
+                rvalid <= 1'b0;
+            end
+
+            start_d <= ctrl_reg[0];
+
+            if (!busy && ctrl_reg[0] && !start_d)
+            begin
+                busy      <= 1'b1;
+                cs_reg    <= 1'b0;
+                sclk_reg  <= 1'b0;
+                bit_cnt   <= 3'd7;
+                shift_reg <= tx_reg;
+                mosi_reg  <= tx_reg[7];
+            end
+            else if (busy)
+            begin
+                sclk_reg <= ~sclk_reg;
+
+                if (sclk_reg == 1'b0)
+                begin
+                    mosi_reg <= shift_reg[7];
+                end
+                else
+                begin
+                    shift_reg <= {shift_reg[6:0], spi_miso};
+
+                    if (bit_cnt == 3'd0)
+                    begin
+                        busy      <= 1'b0;
+                        cs_reg    <= 1'b1;
+                        sclk_reg  <= 1'b0;
+                        rx_reg    <= {shift_reg[6:0], spi_miso};
+                        ctrl_reg[0] <= 1'b0;
+                        status_reg[1] <= 1'b1;
+                    end
+                    else
+                    begin
+                        bit_cnt <= bit_cnt - 3'd1;
                     end
                 end
-
-                R_DATA: begin
-                    if (S_RVALID && S_RREADY) begin
-                        S_RVALID <= 1'b0;
-                        r_state  <= R_IDLE;
-                    end
-                end
-
-                default: r_state <= R_IDLE;
-            endcase
-        end
-    end
-
-    // ---------------- Simple SPI engine (8-bit, mode 0/1/2/3) ----------------
-    always @(posedge aclk) begin
-        if (!aresetn) begin
-            spi_sck    <= 1'b0;
-            spi_mosi   <= 1'b0;
-            spi_cs_n   <= 1'b1;
-            bit_cnt    <= 8'd0;
-            clk_div_cnt<= 8'd0;
-            spi_busy   <= 1'b0;
-            spi_done   <= 1'b0;
-            shift_tx   <= 8'd0;
-            shift_rx   <= 8'd0;
-            rx_reg     <= 32'h0;
-        end else begin
-            spi_done <= 1'b0;
-
-            if (!spi_busy && ctrl_en && ctrl_start) begin
-                // Start a new transfer
-                spi_busy    <= 1'b1;
-                spi_cs_n    <= 1'b0;
-                bit_cnt     <= 8'd8;
-                clk_div_cnt <= 8'd0;
-                shift_tx    <= tx_reg[7:0];
-                shift_rx    <= 8'd0;
-                spi_sck     <= ctrl_cpol;
-            end else if (spi_busy) begin
-                // Clock divider
-                if (clk_div_cnt == {4'b0, ctrl_div}) begin
-                    clk_div_cnt <= 8'd0;
-                    // Toggle SCK
-                    spi_sck <= ~spi_sck;
-
-                    // Sample/shift on appropriate edge
-                    if (spi_sck == ctrl_cpol) begin
-                        // leading edge – output bit
-                        spi_mosi <= shift_tx[7];
-                    end else begin
-                        // trailing edge – sample MISO, shift next
-                        shift_rx <= {shift_rx[6:0], spi_miso};
-                        shift_tx <= {shift_tx[6:0], 1'b0};
-                        bit_cnt  <= bit_cnt - 1'b1;
-                        if (bit_cnt == 1) begin
-                            spi_busy <= 1'b0;
-                            spi_done <= 1'b1;
-                            spi_cs_n <= 1'b1;
-                            rx_reg   <= {24'h0, {shift_rx[6:0], spi_miso}};
-                        end
-                    end
-                end else begin
-                    clk_div_cnt <= clk_div_cnt + 1'b1;
-                end
+            end
+            else
+            begin
+                cs_reg   <= 1'b1;
+                sclk_reg <= 1'b0;
             end
         end
     end
