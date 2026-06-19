@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 // =====================================================================
 //  3-stage pipelined RV32I processor with Harvard AXI Handshakes
 // =====================================================================
@@ -19,26 +20,10 @@ module processor (
     output     [ 3:0] dmem_wstrb,
     output     [31:0] dmem_wdata,
     input             dmem_ready,
-    input      [31:0] dmem_rdata,
-
-    // Retire-stage monitor / debug outputs
-    output     [31:0] pc_debug,
-    output     [31:0] inst_debug,
-    output            rf_we,
-    output     [ 4:0] rf_waddr,
-    output     [31:0] rf_wdata,
-    output            mem_we_dbg,
-    output            mem_re_dbg,
-    output     [31:0] mem_addr_dbg,
-    output     [31:0] mem_wdata_dbg,
-    output     [31:0] mem_rdata_dbg,
-    output            br_taken_dbg,
-    output            trap_taken,
-    output     [31:0] epc_debug,
-    output            timer_irq_dbg
+    input      [31:0] dmem_rdata
 );
 
-    // ---------------- PC & IF Stage ----------------
+// ---------------- PC & IF Stage ----------------
     wire [31:0] pc_out_IF;
     reg  [31:0] pc_out_DE;
     reg  [31:0] pc_out_MW;
@@ -47,7 +32,6 @@ module processor (
     wire [31:0] inst_IF;
     reg  [31:0] inst_DE;
     reg  [31:0] inst_MW;
-
     reg  [ 4:0] waddr;
 
     // ---------------- Decoded fields & Datapath ----------------
@@ -71,20 +55,26 @@ module processor (
     wire [ 3:0] aluop;
 
     // ---------------- Control signals ----------------
-    wire        rf_en_DE;  reg rf_en_MW;
+    wire        rf_en_DE;
+    reg         rf_en_MW;
     wire        sel_a, sel_b;
-    wire        rd_en_DE;  reg rd_en_MW;
-    wire        wr_en_DE;  reg wr_en_MW;
-    wire [ 1:0] wb_sel_DE; reg [1:0] wb_sel_MW;
-    wire [ 2:0] mem_acc_mode_DE; reg [2:0] mem_acc_mode_MW;
+    wire        rd_en_DE;  
+    reg         rd_en_MW;
+    wire        wr_en_DE;
+    reg         wr_en_MW;
+    wire [ 1:0] wb_sel_DE; 
+    reg  [1:0]  wb_sel_MW;
+    wire [ 2:0] mem_acc_mode_DE; 
+    reg  [2:0]  mem_acc_mode_MW;
     wire [ 2:0] br_type;
-    
     wire        br_take_DE;
     reg         br_take_IF;
-    
-    wire        csr_rd_DE; reg csr_rd_MW;
-    wire        csr_wr_DE; wire csr_wr_MW; 
-    wire        is_mret_DE; reg is_mret_MW;
+    wire        csr_rd_DE; 
+    reg         csr_rd_MW;
+    wire        csr_wr_DE;
+    wire        csr_wr_MW; 
+    wire        is_mret_DE; 
+    reg         is_mret_MW;
     wire [31:0] csr_rdata;
 
     // ---------------- Trap / EPC ----------------
@@ -99,7 +89,7 @@ module processor (
     wire        forward_a, forward_b;
     wire        stall_IF, flush_DE;
 
-    // =================== Memory Interface Logic ===================
+// =================== Memory Interface Logic ===================
     assign imem_addr  = pc_out_IF;
     assign imem_valid = 1'b1;
     assign inst_IF    = imem_rdata;
@@ -168,10 +158,10 @@ module processor (
     end
     assign rdata = rdata_formatted;
 
-    // =================== Pipeline Stall Generator ===================
+// =================== Pipeline Stall Generator ===================
     wire stall_ext = (imem_valid && !imem_ready) || (dmem_valid && !dmem_ready);
 
-    // =================== Instruction Fetch ===================
+// =================== Instruction Fetch ===================
     mux_2x1 mux_2x1_pc (.in_0(pc_out_IF + 32'd4), .in_1(opr_res_IF), .select_line(br_take_IF), .out(new_pc));
     mux_2x1 mux_2x1_epc (.in_0(new_pc), .in_1(epc_IF), .select_line(epc_taken_IF), .out(epc_pc));
     
@@ -211,25 +201,21 @@ module processor (
 
     // =================== Decode-Execute ===================
     inst_dec inst_dec_i (.inst(inst_DE), .rs1(rs1_DE), .rs2(rs2_DE), .rd(rd_DE), .opcode(opcode), .funct3(funct3), .funct7(funct7));
-
     reg_file reg_file_i (.clk(clk), .rf_en(rf_en_MW), .rs1(rs1_DE), .rs2(rs2_DE), .rd(waddr), .wdata(wdata_DE), .rdata1(rdata1_DE), .rdata2(rdata2_DE));
-    
     controller controller_i (.opcode(opcode), .funct3(funct3), .funct7(funct7), .br_taken(br_taken), .aluop(aluop), .rf_en(rf_en_DE), .sel_a(sel_a), .sel_b(sel_b), .rd_en(rd_en_DE), .wr_en(wr_en_DE), .wb_sel(wb_sel_DE), .mem_acc_mode(mem_acc_mode_DE), .br_type(br_type), .br_take(br_take_DE), .csr_rd(csr_rd_DE), .csr_wr(csr_wr_DE), .is_mret(is_mret_DE));
-    
     imm_gen imm_gen_i (.inst(inst_DE), .imm_val(imm_val_DE));
 
     always @(*) begin
-        if (forward_a) forward_opr_a = wdata_MW; else forward_opr_a = rdata1_DE;
+        if (forward_a) forward_opr_a = wdata_MW;
+        else forward_opr_a = rdata1_DE;
         if (forward_b) forward_opr_b = wdata_MW; else forward_opr_b = rdata2_DE;
     end
 
     mux_2x1 mux_2x1_alu_opr_a (.in_0(pc_out_DE), .in_1(forward_opr_a), .select_line(sel_a), .out(opr_a));
     mux_2x1 mux_2x1_alu_opr_b (.in_0(forward_opr_b), .in_1(imm_val_DE), .select_line(sel_b), .out(opr_b));
-    
     alu alu_i (.aluop(aluop), .opr_a(opr_a), .opr_b(opr_b), .opr_res(opr_res_DE));
     
     br_cond br_cond_i (.rdata1(forward_opr_a), .rdata2(forward_opr_b), .br_type(br_type), .br_taken(br_taken));
-
     always @(*) begin
         br_take_IF = br_take_DE;
         opr_res_IF = opr_res_DE;
@@ -272,9 +258,7 @@ module processor (
 
     // =================== Memory-Writeback ===================
     csr_reg csr_reg_i (.clk(clk), .rst(rst), .wdata(rdata1_MW), .pc(pc_out_MW), .trap(timer_interrupt), .csr_rd(csr_rd_MW), .csr_wr(csr_wr_MW), .is_mret(is_mret_MW), .inst(inst_MW), .rdata(csr_rdata), .epc(epc_MW), .epc_taken(epc_taken_MW));
-    
     mux_4x1 wb_mux (.in_0(pc_out_MW + 32'd4), .in_1(opr_res_MW), .in_2(rdata), .in_3(csr_rdata), .select_line(wb_sel_MW), .out(wdata_MW));
-
     always @(*) begin
         epc_IF       = epc_MW;
         epc_taken_IF = epc_taken_MW;
@@ -285,22 +269,8 @@ module processor (
     // =================== Hazard Unit ===================
     hazard_unit hazard_unit_i (.rs1_DE(rs1_DE), .rs2_DE(rs2_DE), .rd_MW(rd_MW), .rf_en_MW(rf_en_MW), .forward_a(forward_a), .forward_b(forward_b), .inst_IF(inst_IF), .rd_DE(rd_DE), .wb_sel_DE(wb_sel_DE), .br_taken(br_take_DE), .stall_IF(stall_IF), .flush_DE(flush_DE));
 
-    // =================== Debug ===================
-    assign pc_debug      = pc_out_MW;
-    assign inst_debug    = inst_MW;
+    // =================== Internal Wire Assignments ===================
     assign rd_MW         = inst_MW[11:7];
     assign csr_wr_MW     = (inst_MW[6:0] == 7'b1110011) && (inst_MW[14:12] != 3'b000);
-    assign rf_we         = rf_en_MW;
-    assign rf_waddr      = waddr;
-    assign rf_wdata      = wdata_DE;
-    assign br_taken_dbg  = br_take_DE;
-    assign trap_taken    = epc_taken_MW;
-    assign epc_debug     = epc_MW;
-    assign timer_irq_dbg = timer_interrupt;
-    
-    assign mem_we_dbg    = wr_en_MW;
-    assign mem_re_dbg    = rd_en_MW;
-    assign mem_addr_dbg  = opr_res_MW;
-    assign mem_wdata_dbg = rdata2_MW;
-    assign mem_rdata_dbg = dmem_rdata;
+
 endmodule

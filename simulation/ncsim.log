@@ -3,909 +3,905 @@ ncsim(64): 15.20-s086: (c) Copyright 1995-2020 Cadence Design Systems, Inc.
 -------------------------------------
 Relinquished control to SimVision...
 ncsim> 
-ncsim> database -open waves -into waves.shm -default
-Created default SHM database waves
-ncsim> probe -create -shm tb_axi_soc.clk tb_axi_soc.gpio_in tb_axi_soc.gpio_out tb_axi_soc.i tb_axi_soc.rst tb_axi_soc.spi_cs tb_axi_soc.spi_miso tb_axi_soc.spi_mosi tb_axi_soc.spi_sclk tb_axi_soc.timer_interrupt
-Created probe 1
 ncsim> run
-[0 ns] PC=00000000 ARVALID=0 ARREADY=1 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000000 ARVALID=0 ARREADY=1 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=xxxxxxxx inst_DE=00000013 inst_MW=00000000 
 
-[0 ns] PC=00000000 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000000 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=xxxxxxxx inst_DE=00000013 inst_MW=00000000 
 
-[0 ns] PC=00000000 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000000 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=xxxxxxxx inst_DE=00000013 inst_MW=00000000 
 
-[0 ns] PC=00000000 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000000 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=xxxxxxxx inst_DE=00000013 inst_MW=00000000 
 
-[0 ns] PC=00000000 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000000 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00500093 inst_DE=00000013 inst_MW=00000000 
 
-[0 ns] PC=00000004 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000004 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00500093 inst_DE=00500093 inst_MW=00000013 
 
-[0 ns] PC=00000004 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000004 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00500093 inst_DE=00500093 inst_MW=00000013 
 
-[0 ns] PC=00000004 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000004 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00500093 inst_DE=00500093 inst_MW=00000013 
 
-[0 ns] PC=00000004 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000004 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00500093 inst_DE=00500093 inst_MW=00000013 
 
-[0 ns] PC=00000004 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000004 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00a00113 inst_DE=00500093 inst_MW=00000013 
 
-[0 ns] PC=00000008 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000008 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00a00113 inst_DE=00a00113 inst_MW=00500093 
 
-[0 ns] PC=00000008 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000008 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00a00113 inst_DE=00a00113 inst_MW=00500093 
 
-[0 ns] PC=00000008 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000008 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00a00113 inst_DE=00a00113 inst_MW=00500093 
 
-[0 ns] PC=00000008 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000008 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00a00113 inst_DE=00a00113 inst_MW=00500093 
 
-[0 ns] PC=00000008 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000008 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00708193 inst_DE=00a00113 inst_MW=00500093 
 
-[0 ns] PC=0000000c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000000c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00708193 inst_DE=00708193 inst_MW=00a00113 
 
-[0 ns] PC=0000000c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000000c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00708193 inst_DE=00708193 inst_MW=00a00113 
 
-[0 ns] PC=0000000c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000000c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00708193 inst_DE=00708193 inst_MW=00a00113 
 
-[0 ns] PC=0000000c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000000c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00708193 inst_DE=00708193 inst_MW=00a00113 
 
-[0 ns] PC=0000000c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000000c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=04302023 inst_DE=00708193 inst_MW=00a00113 
 
-[0 ns] PC=00000010 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000010 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=04302023 inst_DE=04302023 inst_MW=00708193 
 
-[0 ns] PC=00000010 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000010 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=04302023 inst_DE=04302023 inst_MW=00708193 
 
-[0 ns] PC=00000010 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000010 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=04302023 inst_DE=04302023 inst_MW=00708193 
 
-[0 ns] PC=00000010 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000010 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=04302023 inst_DE=04302023 inst_MW=00708193 
 
-[0 ns] PC=00000010 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000010 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=04002203 inst_DE=04302023 inst_MW=00708193 
 
-[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=04002203 inst_DE=04002203 inst_MW=04302023 
 
-[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=04002203 inst_DE=04002203 inst_MW=04302023 
 
-[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=04002203 inst_DE=04002203 inst_MW=04302023 
 
-[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=04002203 inst_DE=04002203 inst_MW=04302023 
 
-[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=1
 inst_IF=04002203 inst_DE=04002203 inst_MW=04302023 
 
-[0 ns] PC=00000014 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000014 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=1
 inst_IF=04002203 inst_DE=04002203 inst_MW=04302023 
 
-[0 ns] PC=00000014 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000014 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=1
 inst_IF=04002203 inst_DE=04002203 inst_MW=04302023 
 
-[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=1
 inst_IF=04002203 inst_DE=04002203 inst_MW=04302023 
 
-[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=1
 inst_IF=00120293 inst_DE=04002203 inst_MW=04302023 
 
-[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00120293 inst_DE=00000013 inst_MW=04002203 
 
-[0 ns] PC=00000014 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000014 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00120293 inst_DE=00000013 inst_MW=04002203 
 
-[0 ns] PC=00000014 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000014 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00120293 inst_DE=00000013 inst_MW=04002203 
 
-[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00120293 inst_DE=00000013 inst_MW=04002203 
 
-[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=1
 inst_IF=00120293 inst_DE=00000013 inst_MW=04002203 
 
-[0 ns] PC=00000014 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000014 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=1
 inst_IF=00120293 inst_DE=00000013 inst_MW=04002203 
 
-[0 ns] PC=00000014 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000014 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=1
 inst_IF=00120293 inst_DE=00000013 inst_MW=04002203 
 
-[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=1
 inst_IF=00120293 inst_DE=00000013 inst_MW=04002203 
 
-[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000014 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=1
 inst_IF=00120293 inst_DE=00000013 inst_MW=04002203 
 
-[0 ns] PC=00000018 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000018 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00120293 inst_DE=00120293 inst_MW=00000013 
 
-[0 ns] PC=00000018 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000018 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00120293 inst_DE=00120293 inst_MW=00000013 
 
-[0 ns] PC=00000018 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000018 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00120293 inst_DE=00120293 inst_MW=00000013 
 
-[0 ns] PC=00000018 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000018 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00120293 inst_DE=00120293 inst_MW=00000013 
 
-[0 ns] PC=00000018 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000018 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=04502223 inst_DE=00120293 inst_MW=00000013 
 
-[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=04502223 inst_DE=04502223 inst_MW=00120293 
 
-[0 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=04502223 inst_DE=04502223 inst_MW=00120293 
 
-[0 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=04502223 inst_DE=04502223 inst_MW=00120293 
 
-[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=04502223 inst_DE=04502223 inst_MW=00120293 
 
-[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=04502223 inst_MW=00120293 
 
-[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=04502223 
 
-[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=04502223 
 
-[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=04502223 
 
-[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=04502223 
 
-[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=1
 inst_IF=0000006f inst_DE=0000006f inst_MW=04502223 
 
-[0 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=1
 inst_IF=0000006f inst_DE=0000006f inst_MW=04502223 
 
-[0 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=1
 inst_IF=0000006f inst_DE=0000006f inst_MW=04502223 
 
-[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=1
 inst_IF=0000006f inst_DE=0000006f inst_MW=04502223 
 
-[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=1
 inst_IF=00000013 inst_DE=0000006f inst_MW=04502223 
 
-[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[0 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[0 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[0 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[0 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[0 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[0 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[0 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[0 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[0 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[0 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[0 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[0 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[0 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[0 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[0 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[1000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=00000013 inst_DE=0000006f inst_MW=00000013 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=1 RREADY=1 imem_ready=0 dmem_ready=0
 inst_IF=00000013 inst_DE=00000013 inst_MW=0000006f 
 
-[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[2000 ns] PC=0000001c ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=1 dmem_ready=0
 inst_IF=0000006f inst_DE=00000013 inst_MW=0000006f 
 
-[3000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[3000 ns] PC=00000020 ARVALID=0 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[3000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[3000 ns] PC=00000020 ARVALID=1 ARREADY=0 RVALID=0 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
-[3000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 mem_ready=z mem_rdata=zzzzzzzz
+[3000 ns] PC=00000020 ARVALID=1 ARREADY=1 RVALID=1 RREADY=0 imem_ready=0 dmem_ready=0
 inst_IF=0000006f inst_DE=0000006f inst_MW=00000013 
 
 ──────────────────────────────────────────
@@ -917,5 +913,5 @@ mem[0x44]  = 0x0000000d (expect 0000000d=13)
 ──────────────────────────────────────────
 PASS: SW/LW/ALU/fetch path correct
 Simulation complete via $finish(1) at time 3025 NS + 0
-../tb_axi_soc.v:126         $finish;
+../tb_axi_soc.v:127         $finish;
 ncsim> 

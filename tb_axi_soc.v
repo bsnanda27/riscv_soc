@@ -75,21 +75,22 @@ module tb_axi_soc;
     // ── AXI bus trace (every cycle after reset) ────────────────────────
     always @(posedge clk) begin
         if (!rst) begin
-            $display("[%0t ns] PC=%08h ARVALID=%b ARREADY=%b RVALID=%b RREADY=%b mem_ready=%b mem_rdata=%08h",
+            $display("[%0t ns] PC=%08h ARVALID=%b ARREADY=%b RVALID=%b RREADY=%b imem_ready=%b dmem_ready=%b",
                      $time/1000,
-                     dut.processor_i.pc_i.pc_out,
+                     dut.processor_i.pc_out_IF,
                      dut.M_AXI_ARVALID,
                      dut.M_AXI_ARREADY,
                      dut.M_AXI_RVALID,
                      dut.M_AXI_RREADY,
-                     dut.mem_ready,
-                     dut.mem_rdata);
-	$display("inst_IF=%h inst_DE=%h inst_MW=%h \n",
-			dut.processor_i.inst_IF,
-			dut.processor_i.inst_DE,
-			dut.processor_i.inst_MW
-			);
-		end
+                     dut.imem_ready,
+                     dut.dmem_ready);
+                     
+            $display("inst_IF=%08h inst_DE=%08h inst_MW=%08h \n",
+                dut.processor_i.inst_IF,
+                dut.processor_i.inst_DE,
+                dut.processor_i.inst_MW
+            );
+        end
     end
 
     // ── Pass/Fail check ────────────────────────────────────────────────
@@ -100,7 +101,7 @@ module tb_axi_soc;
         repeat (300) @(posedge clk);
 
         $display("──────────────────────────────────────────");
-        $display("PC         = 0x%08h", dut.processor_i.pc_i.pc_out);
+        $display("PC         = 0x%08h", dut.processor_i.pc_out_IF);
         $display("inst_MW    = 0x%08h", dut.processor_i.inst_MW);
         $display("mem[0x00]  = 0x%08h (expect 00500093)", dut.ram_i.mem[0]);
         $display("mem[0x40]  = 0x%08h (expect 0000000c=12)", dut.ram_i.mem[16]);
@@ -117,7 +118,7 @@ module tb_axi_soc;
             $finish;
         end
 
-	if (dut.ram_i.mem[17] !== 32'd13) begin
+        if (dut.ram_i.mem[17] !== 32'd13) begin
             $display("FAIL: mem[0x44] expected 13 (0x0000000D), got 0x%08h", dut.ram_i.mem[17]);
             $finish;
         end

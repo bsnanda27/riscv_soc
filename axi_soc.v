@@ -1,18 +1,6 @@
 `timescale 1ns/1ps
 //=============================================================================
 // rv32i_axi_soc.v  –  Top-level SoC wrapper
-//
-// FIXES vs. original (axi_soc_v-3):
-//   1. Added gpio_in/gpio_out, spi_* ports to match the testbench signals
-//      in tb_axi_soc.vcd (the original had no GPIO/SPI ports at top level).
-//   2. Connected the full peripheral set (RAM, GPIO, SPI) via an address-
-//      decoded AXI interconnect instead of wiring the AXI master directly
-//      to a single RAM. The interconnect decodes mem_addr:
-//         0x0000_0000 – 0x0000_FFFF  → RAM   (64 KB)
-//         0x1000_0000 – 0x1000_00FF  → GPIO
-//         0x2000_0000 – 0x2000_00FF  → SPI
-//   3. Removed the duplicate axi_ram inside rv32i_axi_master (fixed in
-//      rv32i_axi_master.v); the SOC now owns the single RAM instance.
 //=============================================================================
 module rv32i_axi_soc
 (
@@ -32,26 +20,12 @@ module rv32i_axi_soc
 );
 
     //------------------------------------------------------------------
-    // Processor <-> AXI Master (simple memory interface)
-    //------------------------------------------------------------------
-
-    wire        mem_valid;
-    wire        mem_write;
-    wire [31:0] mem_addr;
-    wire [31:0] mem_wdata;
-    wire [3:0]  mem_wstrb;
-
-    wire        mem_ready;
-    wire [31:0] mem_rdata;
-
-    //------------------------------------------------------------------
     // AXI4-Lite Master Bus
     //------------------------------------------------------------------
 
     wire [31:0] M_AXI_AWADDR;
     wire        M_AXI_AWVALID;
     wire        M_AXI_AWREADY;
-
     wire [31:0] M_AXI_WDATA;
     wire [3:0]  M_AXI_WSTRB;
     wire        M_AXI_WVALID;
@@ -60,7 +34,6 @@ module rv32i_axi_soc
     wire [1:0]  M_AXI_BRESP;
     wire        M_AXI_BVALID;
     wire        M_AXI_BREADY;
-
     wire [31:0] M_AXI_ARADDR;
     wire        M_AXI_ARVALID;
     wire        M_AXI_ARREADY;
@@ -73,6 +46,7 @@ module rv32i_axi_soc
     //------------------------------------------------------------------
     // AXI4-Lite Slave buses  (m0=RAM, m1=GPIO, m2=SPI)
     //------------------------------------------------------------------
+    
     // Harvard Bridge connecting CPU and AXI Master
     wire        imem_valid, imem_ready, dmem_valid, dmem_write, dmem_ready;
     wire [31:0] imem_addr, imem_rdata, dmem_addr, dmem_wdata, dmem_rdata;
@@ -211,16 +185,14 @@ module rv32i_axi_soc
     // RAM slave  (64 KB: address 0x0000_0000 – 0x0000_FFFF)
     //------------------------------------------------------------------
 
-    axi_ram #(.MEM_DEPTH(16384)) ram_i   // 16384 × 32-bit words = 64 KB
+    axi_ram #(.MEM_DEPTH(16384)) ram_i
     (
-        .clk     (clk),     .rst     (rst),
+        .clk     (clk),         .rst     (rst),
         .awaddr  (ram_awaddr),  .awvalid (ram_awvalid), .awready (ram_awready),
-        .wdata   (ram_wdata),   .wstrb   (ram_wstrb),
-        .wvalid  (ram_wvalid),  .wready  (ram_wready),
+        .wdata   (ram_wdata),   .wstrb   (ram_wstrb),   .wvalid  (ram_wvalid),  .wready  (ram_wready),
         .bresp   (ram_bresp),   .bvalid  (ram_bvalid),  .bready  (ram_bready),
         .araddr  (ram_araddr),  .arvalid (ram_arvalid), .arready (ram_arready),
-        .rdata   (ram_rdata),   .rresp   (ram_rresp),
-        .rvalid  (ram_rvalid),  .rready  (ram_rready)
+        .rdata   (ram_rdata),   .rresp   (ram_rresp),   .rvalid  (ram_rvalid),  .rready  (ram_rready)
     );
 
     //------------------------------------------------------------------
@@ -229,14 +201,12 @@ module rv32i_axi_soc
 
     axi_gpio gpio_i
     (
-        .clk     (clk),     .rst     (rst),
-        .awaddr  (gpio_awaddr),  .awvalid (gpio_awvalid), .awready (gpio_awready),
-        .wdata   (gpio_wdata),   .wstrb   (gpio_wstrb),
-        .wvalid  (gpio_wvalid),  .wready  (gpio_wready),
-        .bresp   (gpio_bresp),   .bvalid  (gpio_bvalid),  .bready  (gpio_bready),
-        .araddr  (gpio_araddr),  .arvalid (gpio_arvalid), .arready (gpio_arready),
-        .rdata   (gpio_rdata),   .rresp   (gpio_rresp),
-        .rvalid  (gpio_rvalid),  .rready  (gpio_rready),
+        .clk      (clk),         .rst      (rst),
+        .awaddr   (gpio_awaddr), .awvalid  (gpio_awvalid), .awready (gpio_awready),
+        .wdata    (gpio_wdata),  .wstrb    (gpio_wstrb),   .wvalid  (gpio_wvalid),  .wready  (gpio_wready),
+        .bresp    (gpio_bresp),  .bvalid   (gpio_bvalid),  .bready  (gpio_bready),
+        .araddr   (gpio_araddr), .arvalid  (gpio_arvalid), .arready (gpio_arready),
+        .rdata    (gpio_rdata),  .rresp    (gpio_rresp),   .rvalid  (gpio_rvalid),  .rready  (gpio_rready),
         .gpio_in  (gpio_in),
         .gpio_out (gpio_out)
     );
@@ -247,14 +217,12 @@ module rv32i_axi_soc
 
     axi_spi spi_i
     (
-        .clk     (clk),     .rst     (rst),
-        .awaddr  (spi_awaddr),  .awvalid (spi_awvalid), .awready (spi_awready),
-        .wdata   (spi_wdata),   .wstrb   (spi_wstrb),
-        .wvalid  (spi_wvalid),  .wready  (spi_wready),
-        .bresp   (spi_bresp),   .bvalid  (spi_bvalid),  .bready  (spi_bready),
-        .araddr  (spi_araddr),  .arvalid (spi_arvalid), .arready (spi_arready),
-        .rdata   (spi_rdata),   .rresp   (spi_rresp),
-        .rvalid  (spi_rvalid),  .rready  (spi_rready),
+        .clk      (clk),         .rst      (rst),
+        .awaddr   (spi_awaddr),  .awvalid  (spi_awvalid), .awready (spi_awready),
+        .wdata    (spi_wdata),   .wstrb    (spi_wstrb),   .wvalid  (spi_wvalid),  .wready  (spi_wready),
+        .bresp    (spi_bresp),   .bvalid   (spi_bvalid),  .bready  (spi_bready),
+        .araddr   (spi_araddr),  .arvalid  (spi_arvalid), .arready (spi_arready),
+        .rdata    (spi_rdata),   .rresp    (spi_rresp),   .rvalid  (spi_rvalid),  .rready  (spi_rready),
         .spi_sclk (spi_sclk),
         .spi_mosi (spi_mosi),
         .spi_miso (spi_miso),

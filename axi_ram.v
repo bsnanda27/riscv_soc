@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module axi_ram #( parameter MEM_DEPTH = 1024)
 (
     input  wire        clk,
