@@ -1,7 +1,12 @@
 # ==============================================================================
+# Cadence Tool Outputs, GUI States & Simulation Artifacts
+# ==============================================================================
 INCA_libs/
 waves.shm/
 simulation/
+.simvision/
+.nclaunch.dd
+.nclaunch.dd.bak
 *.vcd
 *.log
 *.design_facts
@@ -18,3 +23,4 @@ simulation/
 # Directory Specific Exclusions
 # ==============================================================================
 axi_old/
+errors.md
