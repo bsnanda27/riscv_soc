@@ -1,0 +1,408 @@
+
+#
+# Preferences
+#
+preferences set toolbar-Standard-WatchWindow {
+  usual
+  shown 0
+}
+preferences set plugin-enable-svdatabrowser-new 1
+preferences set toolbar-SimControl-WaveWindow {
+  usual
+  position -anchor e
+}
+preferences set cursorctl-dont-show-sync-warning 1
+preferences set toolbar-Windows-WatchWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-sendToIndago-WaveWindow {
+  usual
+  position -pos 1
+}
+preferences set toolbar-TimeSearch-WaveWindow {
+  usual
+  position -anchor e
+}
+preferences set toolbar-Standard-Console {
+  usual
+  position -pos 1
+}
+preferences set toolbar-Search-Console {
+  usual
+  position -pos 2
+}
+preferences set plugin-enable-groupscope 0
+preferences set plugin-enable-interleaveandcompare 0
+preferences set plugin-enable-waveformfrequencyplot 0
+preferences set toolbar-SimControl-WatchWindow {
+  usual
+  shown 0
+}
+preferences set savedlg-simulator ppe
+preferences set whats-new-dont-show-at-startup 1
+preferences set toolbar-TimeSearch-WatchWindow {
+  usual
+  shown 0
+}
+
+#
+# Mnemonic Maps
+#
+mmap new -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+
+#
+# Design Browser windows
+#
+if {[catch {window new WatchList -name "Design Browser 1" -geometry 730x500+261+33}] != ""} {
+    window geometry "Design Browser 1" 730x500+261+33
+}
+window target "Design Browser 1" on
+browser using {Design Browser 1}
+browser set -scope  simulator::tb_axi_soc.dut 
+browser set \
+    -signalsort name
+browser yview see  simulator::tb_axi_soc.dut 
+browser timecontrol set -lock 0
+
+#
+# Waveform windows
+#
+if {[catch {window new WaveWindow -name "Waveform 1" -geometry 840x986+-10+19}] != ""} {
+    window geometry "Waveform 1" 840x986+-10+19
+}
+window target "Waveform 1" on
+waveform using {Waveform 1}
+waveform sidebar visibility partial
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 175 \
+    -units ps \
+    -valuewidth 75
+waveform baseline set -time 0
+
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.M_AXI_ARADDR[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.M_AXI_ARREADY
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.M_AXI_ARVALID
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.M_AXI_AWADDR[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.M_AXI_AWREADY
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.M_AXI_AWVALID
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.M_AXI_BREADY
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.M_AXI_BRESP[1:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.M_AXI_BVALID
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.M_AXI_RDATA[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.M_AXI_RREADY
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.M_AXI_RRESP[1:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.M_AXI_RVALID
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.M_AXI_WDATA[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.M_AXI_WREADY
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.M_AXI_WSTRB[3:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.M_AXI_WVALID
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.br_taken_dbg
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.clk
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.data_access
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.epc_debug[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.gpio_araddr[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.gpio_arready
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.gpio_arvalid
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.gpio_awaddr[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.gpio_awready
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.gpio_awvalid
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.gpio_bready
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.gpio_bresp[1:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.gpio_bvalid
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.gpio_in[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.gpio_out[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.gpio_rdata[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.gpio_rready
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.gpio_rresp[1:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.gpio_rvalid
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.gpio_wdata[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.gpio_wready
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.gpio_wstrb[3:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.gpio_wvalid
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.inst_debug[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.mem_addr[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.mem_rdata[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.mem_re
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.mem_ready
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.mem_valid
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.mem_wdata[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.mem_we
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.mem_write
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.mem_wstrb[3:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.pc_debug[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.proc_imem_addr[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.proc_imem_rdata[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.proc_mem_addr[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.proc_mem_rdata[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.proc_mem_wdata[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.ram_araddr[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.ram_arready
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.ram_arvalid
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.ram_awaddr[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.ram_awready
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.ram_awvalid
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.ram_bready
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.ram_bresp[1:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.ram_bvalid
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.ram_rdata[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.ram_rready
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.ram_rresp[1:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.ram_rvalid
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.ram_wdata[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.ram_wready
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.ram_wstrb[3:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.ram_wvalid
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.rf_waddr[4:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.rf_wdata[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.rf_we
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.rst
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.spi_araddr[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.spi_arready
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.spi_arvalid
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.spi_awaddr[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.spi_awready
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.spi_awvalid
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.spi_bready
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.spi_bresp[1:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.spi_bvalid
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.spi_cs
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.spi_miso
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.spi_mosi
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.spi_rdata[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.spi_rready
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.spi_rresp[1:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.spi_rvalid
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.spi_sclk
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.spi_wdata[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.spi_wready
+	} ]
+set id [waveform add -signals  {
+	{simulator::tb_axi_soc.dut.spi_wstrb[3:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.spi_wvalid
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.timer_interrupt
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.timer_irq_dbg
+	} ]
+set id [waveform add -signals  {
+	simulator::tb_axi_soc.dut.trap_taken
+	} ]
+
+waveform xview limits 1465234ps 1559766ps
+
+#
+# Waveform Window Links
+#
+
+#
+# Console windows
+#
+console set -windowname Console
+window geometry Console 1680x986+-1+26
+
+#
+# Layout selection
+#
