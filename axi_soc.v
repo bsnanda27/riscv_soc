@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 //=============================================================================
-// rv32i_axi_soc.v  –  Top-level SoC wrapper
+// rv32i_axi_soc.v  –  Top-level SoC wrapper with I/D Caches
 //=============================================================================
 module rv32i_axi_soc
 (
@@ -18,7 +18,6 @@ module rv32i_axi_soc
     input  wire        spi_miso,
     output wire        spi_cs
 );
-
     //------------------------------------------------------------------
     // AXI4-Lite Master Bus
     //------------------------------------------------------------------
@@ -47,15 +46,23 @@ module rv32i_axi_soc
     // AXI4-Lite Slave buses  (m0=RAM, m1=GPIO, m2=SPI)
     //------------------------------------------------------------------
     
-    // Harvard Bridge connecting CPU and AXI Master
+    // Core CPU memory buses (Now connected to Caches)
     wire        imem_valid, imem_ready, dmem_valid, dmem_write, dmem_ready;
     wire [31:0] imem_addr, imem_rdata, dmem_addr, dmem_wdata, dmem_rdata;
     wire [3:0]  dmem_wstrb;
+
+    // Cache to AXI Master wrapper buses
+    wire        w_imem_req, w_imem_ready;
+    wire [31:0] w_imem_addr, w_imem_rdata;
+
+    wire        w_dmem_req, w_dmem_wr, w_dmem_ready;
+    wire [31:0] w_dmem_addr, w_dmem_wdata, w_dmem_rdata;
+    wire [3:0]  w_dmem_wstrb;
     
     // RAM slave
     wire [31:0] ram_awaddr;  wire ram_awvalid;  wire ram_awready;
     wire [31:0] ram_wdata;   wire [3:0] ram_wstrb; wire ram_wvalid; wire ram_wready;
-    wire [1:0]  ram_bresp;   wire ram_bvalid;   wire ram_bready;
+    wire [1:0]  ram_bresp;   wire ram_bvalid;      wire ram_bready;
     wire [31:0] ram_araddr;  wire ram_arvalid;  wire ram_arready;
     wire [31:0] ram_rdata;   wire [1:0] ram_rresp; wire ram_rvalid; wire ram_rready;
 
@@ -69,7 +76,7 @@ module rv32i_axi_soc
     // SPI slave
     wire [31:0] spi_awaddr;  wire spi_awvalid;  wire spi_awready;
     wire [31:0] spi_wdata;   wire [3:0] spi_wstrb; wire spi_wvalid; wire spi_wready;
-    wire [1:0]  spi_bresp;   wire spi_bvalid;   wire spi_bready;
+    wire [1:0]  spi_bresp;   wire spi_bvalid;      wire spi_bready;
     wire [31:0] spi_araddr;  wire spi_arvalid;  wire spi_arready;
     wire [31:0] spi_rdata;   wire [1:0] spi_rresp; wire spi_rvalid; wire spi_rready;
 
@@ -97,6 +104,50 @@ module rv32i_axi_soc
     );
 
     //------------------------------------------------------------------
+    // Instruction & Data Caches
+    //------------------------------------------------------------------
+
+    icache icache_i (
+        .clk            (clk),
+        .rst            (rst),
+        
+        // CPU Core Side Interface
+        .cpu_imem_addr  (imem_addr),
+        .cpu_imem_valid (imem_valid),
+        .cpu_imem_ready (imem_ready),
+        .cpu_imem_rdata (imem_rdata),
+        
+        // AXI Wrapper Side Interface
+        .w_imem_req     (w_imem_req),
+        .w_imem_addr    (w_imem_addr),
+        .w_imem_ready   (w_imem_ready),
+        .w_imem_rdata   (w_imem_rdata)
+    );
+
+    dcache dcache_i (
+        .clk            (clk),
+        .rst            (rst),
+        
+        // CPU Core Side Interface
+        .cpu_dmem_addr  (dmem_addr),
+        .cpu_dmem_valid (dmem_valid),
+        .cpu_dmem_write (dmem_write),
+        .cpu_dmem_wstrb (dmem_wstrb),
+        .cpu_dmem_wdata (dmem_wdata),
+        .cpu_dmem_ready (dmem_ready),
+        .cpu_dmem_rdata (dmem_rdata),
+        
+        // AXI Wrapper Side Interface
+        .w_dmem_req     (w_dmem_req),
+        .w_dmem_wr      (w_dmem_wr),
+        .w_dmem_addr    (w_dmem_addr),
+        .w_dmem_wstrb   (w_dmem_wstrb),
+        .w_dmem_wdata   (w_dmem_wdata),
+        .w_dmem_ready   (w_dmem_ready),
+        .w_dmem_rdata   (w_dmem_rdata)
+    );
+
+    //------------------------------------------------------------------
     // AXI Master Adapter
     //------------------------------------------------------------------
 
@@ -104,18 +155,19 @@ module rv32i_axi_soc
         .clk             (clk),
         .rst             (rst),
 
-        .imem_addr       (imem_addr),
-        .imem_valid      (imem_valid),
-        .imem_ready      (imem_ready),
-        .imem_rdata      (imem_rdata),
+        // Connect to Wrapper Side of Caches
+        .imem_addr       (w_imem_addr),
+        .imem_valid      (w_imem_req),
+        .imem_ready      (w_imem_ready),
+        .imem_rdata      (w_imem_rdata),
 
-        .dmem_addr       (dmem_addr),
-        .dmem_valid      (dmem_valid),
-        .dmem_write      (dmem_write),
-        .dmem_wstrb      (dmem_wstrb),
-        .dmem_wdata      (dmem_wdata),
-        .dmem_ready      (dmem_ready),
-        .dmem_rdata      (dmem_rdata),
+        .dmem_addr       (w_dmem_addr),
+        .dmem_valid      (w_dmem_req),
+        .dmem_write      (w_dmem_wr),
+        .dmem_wstrb      (w_dmem_wstrb),
+        .dmem_wdata      (w_dmem_wdata),
+        .dmem_ready      (w_dmem_ready),
+        .dmem_rdata      (w_dmem_rdata),
 
         .M_AXI_AWADDR    (M_AXI_AWADDR),
         .M_AXI_AWVALID   (M_AXI_AWVALID),
@@ -191,14 +243,10 @@ module rv32i_axi_soc
         .rst             (rst),
 
         .S_AXI_AWADDR    (ram_awaddr),.S_AXI_AWVALID   (ram_awvalid),.S_AXI_AWREADY   (ram_awready),
-
-        .S_AXI_WDATA     (ram_wdata),.S_AXI_WSTRB     (ram_wstrb),.S_AXI_WVALID    (ram_wvalid),.S_AXI_WREADY    (ram_wready),
-
-        .S_AXI_BRESP     (ram_bresp),.S_AXI_BVALID    (ram_bvalid),.S_AXI_BREADY    (ram_bready),
-
+        .S_AXI_WDATA     (ram_wdata), .S_AXI_WSTRB     (ram_wstrb),  .S_AXI_WVALID    (ram_wvalid),.S_AXI_WREADY    (ram_wready),
+        .S_AXI_BRESP     (ram_bresp), .S_AXI_BVALID    (ram_bvalid), .S_AXI_BREADY    (ram_bready),
         .S_AXI_ARADDR    (ram_araddr),.S_AXI_ARVALID   (ram_arvalid),.S_AXI_ARREADY   (ram_arready),
-
-        .S_AXI_RDATA     (ram_rdata),.S_AXI_RRESP     (ram_rresp),.S_AXI_RVALID    (ram_rvalid),.S_AXI_RREADY    (ram_rready)
+        .S_AXI_RDATA     (ram_rdata), .S_AXI_RRESP     (ram_rresp),  .S_AXI_RVALID    (ram_rvalid),.S_AXI_RREADY    (ram_rready)
     );
 
     //------------------------------------------------------------------
