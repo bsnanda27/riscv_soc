@@ -23,7 +23,7 @@ module processor (
     input      [31:0] dmem_rdata
 );
 
-// ---------------- PC & IF Stage ----------------
+    // ---------------- PC & IF Stage ----------------
     wire [31:0] pc_out_IF;
     reg  [31:0] pc_out_DE;
     reg  [31:0] pc_out_MW;
@@ -69,11 +69,11 @@ module processor (
     wire [ 2:0] br_type;
     wire        br_take_DE;
     reg         br_take_IF;
-    wire        csr_rd_DE; 
+    wire        csr_rd_DE;
     reg         csr_rd_MW;
     wire        csr_wr_DE;
     wire        csr_wr_MW; 
-    wire        is_mret_DE; 
+    wire        is_mret_DE;
     reg         is_mret_MW;
     wire [31:0] csr_rdata;
 
@@ -89,7 +89,7 @@ module processor (
     wire        forward_a, forward_b;
     wire        stall_IF, flush_DE;
 
-// =================== Memory Interface Logic ===================
+    // =================== Memory Interface Logic ===================
     assign imem_addr  = pc_out_IF;
     assign imem_valid = 1'b1;
     assign inst_IF    = imem_rdata;
@@ -158,10 +158,10 @@ module processor (
     end
     assign rdata = rdata_formatted;
 
-// =================== Pipeline Stall Generator ===================
+    // =================== Pipeline Stall Generator ===================
     wire stall_ext = (imem_valid && !imem_ready) || (dmem_valid && !dmem_ready);
 
-// =================== Instruction Fetch ===================
+    // =================== Instruction Fetch ===================
     mux_2x1 mux_2x1_pc (.in_0(pc_out_IF + 32'd4), .in_1(opr_res_IF), .select_line(br_take_IF), .out(new_pc));
     mux_2x1 mux_2x1_epc (.in_0(new_pc), .in_1(epc_IF), .select_line(epc_taken_IF), .out(epc_pc));
     
@@ -208,7 +208,9 @@ module processor (
     always @(*) begin
         if (forward_a) forward_opr_a = wdata_MW;
         else forward_opr_a = rdata1_DE;
-        if (forward_b) forward_opr_b = wdata_MW; else forward_opr_b = rdata2_DE;
+        
+        if (forward_b) forward_opr_b = wdata_MW; 
+        else forward_opr_b = rdata2_DE;
     end
 
     mux_2x1 mux_2x1_alu_opr_a (.in_0(pc_out_DE), .in_1(forward_opr_a), .select_line(sel_a), .out(opr_a));
@@ -244,8 +246,11 @@ module processor (
             pc_out_MW       <= pc_out_DE;
             inst_MW         <= inst_DE;
             opr_res_MW      <= opr_res_DE;
-            rdata1_MW       <= rdata1_DE;
-            rdata2_MW       <= rdata2_DE;
+            
+            // FIX: Latch the hazard-resolved values, NOT the raw register file outputs!
+            rdata1_MW       <= forward_opr_a; 
+            rdata2_MW       <= forward_opr_b; 
+            
             rf_en_MW        <= rf_en_DE;
             rd_en_MW        <= rd_en_DE;
             wr_en_MW        <= wr_en_DE;
@@ -259,6 +264,7 @@ module processor (
     // =================== Memory-Writeback ===================
     csr_reg csr_reg_i (.clk(clk), .rst(rst), .wdata(rdata1_MW), .pc(pc_out_MW), .trap(timer_interrupt), .csr_rd(csr_rd_MW), .csr_wr(csr_wr_MW), .is_mret(is_mret_MW), .inst(inst_MW), .rdata(csr_rdata), .epc(epc_MW), .epc_taken(epc_taken_MW));
     mux_4x1 wb_mux (.in_0(pc_out_MW + 32'd4), .in_1(opr_res_MW), .in_2(rdata), .in_3(csr_rdata), .select_line(wb_sel_MW), .out(wdata_MW));
+    
     always @(*) begin
         epc_IF       = epc_MW;
         epc_taken_IF = epc_taken_MW;

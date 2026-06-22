@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 //=============================================================================
-// rv32i_axi_soc.v  –  Top-level SoC wrapper
+// rv32i_axi_soc.v  –  Top-level SoC wrapper with I-Cache & D-Cache
 //=============================================================================
 module rv32i_axi_soc
 (
@@ -22,35 +22,15 @@ module rv32i_axi_soc
     //------------------------------------------------------------------
     // AXI4-Lite Master Bus
     //------------------------------------------------------------------
-
-    wire [31:0] M_AXI_AWADDR;
-    wire        M_AXI_AWVALID;
-    wire        M_AXI_AWREADY;
-    wire [31:0] M_AXI_WDATA;
-    wire [3:0]  M_AXI_WSTRB;
-    wire        M_AXI_WVALID;
-    wire        M_AXI_WREADY;
-
-    wire [1:0]  M_AXI_BRESP;
-    wire        M_AXI_BVALID;
-    wire        M_AXI_BREADY;
-    wire [31:0] M_AXI_ARADDR;
-    wire        M_AXI_ARVALID;
-    wire        M_AXI_ARREADY;
-
-    wire [31:0] M_AXI_RDATA;
-    wire [1:0]  M_AXI_RRESP;
-    wire        M_AXI_RVALID;
-    wire        M_AXI_RREADY;
+    wire [31:0] M_AXI_AWADDR;  wire        M_AXI_AWVALID; wire        M_AXI_AWREADY;
+    wire [31:0] M_AXI_WDATA;   wire [3:0]  M_AXI_WSTRB;   wire        M_AXI_WVALID;  wire        M_AXI_WREADY;
+    wire [1:0]  M_AXI_BRESP;   wire        M_AXI_BVALID;  wire        M_AXI_BREADY;
+    wire [31:0] M_AXI_ARADDR;  wire        M_AXI_ARVALID; wire        M_AXI_ARREADY;
+    wire [31:0] M_AXI_RDATA;   wire [1:0]  M_AXI_RRESP;   wire        M_AXI_RVALID;  wire        M_AXI_RREADY;
 
     //------------------------------------------------------------------
     // AXI4-Lite Slave buses  (m0=RAM, m1=GPIO, m2=SPI)
     //------------------------------------------------------------------
-    
-    // Harvard Bridge connecting CPU and AXI Master
-    wire        imem_valid, imem_ready, dmem_valid, dmem_write, dmem_ready;
-    wire [31:0] imem_addr, imem_rdata, dmem_addr, dmem_wdata, dmem_rdata;
-    wire [3:0]  dmem_wstrb;
     
     // RAM slave
     wire [31:0] ram_awaddr;  wire ram_awvalid;  wire ram_awready;
@@ -74,9 +54,38 @@ module rv32i_axi_soc
     wire [31:0] spi_rdata;   wire [1:0] spi_rresp; wire spi_rvalid; wire spi_rready;
 
     //------------------------------------------------------------------
+    // Processor to Cache Interfaces
+    //------------------------------------------------------------------
+    wire        imem_valid, imem_ready, dmem_valid, dmem_write, dmem_ready;
+    wire [31:0] imem_addr, imem_rdata, dmem_addr, dmem_wdata, dmem_rdata;
+    wire [3:0]  dmem_wstrb;
+
+    //------------------------------------------------------------------
+    // Cache to AXI Master Interfaces
+    //------------------------------------------------------------------
+    wire        c2a_imem_req;
+    wire [31:0] c2a_imem_addr;
+
+    wire        c2a_dmem_req, c2a_dmem_wr;
+    wire [31:0] c2a_dmem_addr, c2a_dmem_wdata;
+    wire [3:0]  c2a_dmem_wstrb;
+
+    wire        axi_imem_valid, axi_imem_ready;
+    wire [31:0] axi_imem_addr, axi_imem_rdata;
+
+    wire        axi_dmem_valid, axi_dmem_write, axi_dmem_ready;
+    wire [31:0] axi_dmem_addr, axi_dmem_wdata, axi_dmem_rdata;
+    wire [3:0]  axi_dmem_wstrb;
+
+    // Local responses back to CPU from caches
+    wire        icache_ready;
+    wire [31:0] icache_rdata;
+    wire        dcache_ready;
+    wire [31:0] dcache_rdata;
+
+    //------------------------------------------------------------------
     // Processor
     //------------------------------------------------------------------
-
     processor processor_i (
         .clk             (clk),
         .rst             (rst),
@@ -97,142 +106,166 @@ module rv32i_axi_soc
     );
 
     //------------------------------------------------------------------
+    // Instruction Cache
+    //------------------------------------------------------------------
+    icache icache_i (
+        .clk             (clk),
+        .rst             (rst),
+        .cpu_imem_addr   (imem_addr),
+        .cpu_imem_valid  (imem_valid),
+        .cpu_imem_ready  (icache_ready),
+        .cpu_imem_rdata  (icache_rdata),
+        
+        .w_imem_req      (c2a_imem_req),
+        .w_imem_addr     (c2a_imem_addr),
+        .w_imem_ready    (axi_imem_ready),
+        .w_imem_rdata    (axi_imem_rdata)
+    );
+
+    // I-Cache straight to AXI master
+    assign axi_imem_valid = c2a_imem_req;
+    assign axi_imem_addr  = c2a_imem_addr;
+    assign imem_ready     = icache_ready;
+    assign imem_rdata     = icache_rdata;
+
+    //------------------------------------------------------------------
+    // Data Cache & MMIO Bypass Multiplexer
+    //------------------------------------------------------------------
+    // If highest nibble is NOT 0, it's an MMIO access (GPIO/SPI)
+    wire is_mmio = (dmem_addr[31:28] != 4'h0);
+
+    dcache dcache_i (
+        .clk             (clk),
+        .rst             (rst),
+        .cpu_dmem_addr   (dmem_addr),
+        .cpu_dmem_valid  (dmem_valid && !is_mmio), // Hide MMIO requests from D-Cache
+        .cpu_dmem_write  (dmem_write),
+        .cpu_dmem_wstrb  (dmem_wstrb),
+        .cpu_dmem_wdata  (dmem_wdata),
+        .cpu_dmem_ready  (dcache_ready),
+        .cpu_dmem_rdata  (dcache_rdata),
+
+        .w_dmem_req      (c2a_dmem_req),
+        .w_dmem_wr       (c2a_dmem_wr),
+        .w_dmem_addr     (c2a_dmem_addr),
+        .w_dmem_wstrb    (c2a_dmem_wstrb),
+        .w_dmem_wdata    (c2a_dmem_wdata),
+        .w_dmem_ready    (axi_dmem_ready && !is_mmio), // Only accept AXI response if it was ours
+        .w_dmem_rdata    (axi_dmem_rdata)
+    );
+
+    // Multiplex CPU return path (Cache hit vs MMIO return)
+    assign dmem_ready = is_mmio ? axi_dmem_ready : dcache_ready;
+    assign dmem_rdata = is_mmio ? axi_dmem_rdata : dcache_rdata;
+
+    // Multiplex AXI Master trigger path (Cache miss/write vs MMIO)
+    assign axi_dmem_valid = is_mmio ? dmem_valid : c2a_dmem_req;
+    assign axi_dmem_write = is_mmio ? dmem_write : c2a_dmem_wr;
+    assign axi_dmem_addr  = is_mmio ? dmem_addr  : c2a_dmem_addr;
+    assign axi_dmem_wstrb = is_mmio ? dmem_wstrb : c2a_dmem_wstrb;
+    assign axi_dmem_wdata = is_mmio ? dmem_wdata : c2a_dmem_wdata;
+
+    //------------------------------------------------------------------
     // AXI Master Adapter
     //------------------------------------------------------------------
-
     rv32i_axi_master axi_master_i (
         .clk             (clk),
         .rst             (rst),
 
-        .imem_addr       (imem_addr),
-        .imem_valid      (imem_valid),
-        .imem_ready      (imem_ready),
-        .imem_rdata      (imem_rdata),
+        .imem_addr       (axi_imem_addr),
+        .imem_valid      (axi_imem_valid),
+        .imem_ready      (axi_imem_ready),
+        .imem_rdata      (axi_imem_rdata),
 
-        .dmem_addr       (dmem_addr),
-        .dmem_valid      (dmem_valid),
-        .dmem_write      (dmem_write),
-        .dmem_wstrb      (dmem_wstrb),
-        .dmem_wdata      (dmem_wdata),
-        .dmem_ready      (dmem_ready),
-        .dmem_rdata      (dmem_rdata),
+        .dmem_addr       (axi_dmem_addr),
+        .dmem_valid      (axi_dmem_valid),
+        .dmem_write      (axi_dmem_write),
+        .dmem_wstrb      (axi_dmem_wstrb),
+        .dmem_wdata      (axi_dmem_wdata),
+        .dmem_ready      (axi_dmem_ready),
+        .dmem_rdata      (axi_dmem_rdata),
 
-        .M_AXI_AWADDR    (M_AXI_AWADDR),
-        .M_AXI_AWVALID   (M_AXI_AWVALID),
-        .M_AXI_AWREADY   (M_AXI_AWREADY),
-        .M_AXI_WDATA     (M_AXI_WDATA),
-        .M_AXI_WSTRB     (M_AXI_WSTRB),
-        .M_AXI_WVALID    (M_AXI_WVALID),
-        .M_AXI_WREADY    (M_AXI_WREADY),
-        .M_AXI_BRESP     (M_AXI_BRESP),
-        .M_AXI_BVALID    (M_AXI_BVALID),
-        .M_AXI_BREADY    (M_AXI_BREADY),
-        .M_AXI_ARADDR    (M_AXI_ARADDR),
-        .M_AXI_ARVALID   (M_AXI_ARVALID),
-        .M_AXI_ARREADY   (M_AXI_ARREADY),
-        .M_AXI_RDATA     (M_AXI_RDATA),
-        .M_AXI_RRESP     (M_AXI_RRESP),
-        .M_AXI_RVALID    (M_AXI_RVALID),
-        .M_AXI_RREADY    (M_AXI_RREADY)
+        .M_AXI_AWADDR    (M_AXI_AWADDR),  .M_AXI_AWVALID   (M_AXI_AWVALID), .M_AXI_AWREADY   (M_AXI_AWREADY),
+        .M_AXI_WDATA     (M_AXI_WDATA),   .M_AXI_WSTRB     (M_AXI_WSTRB),   .M_AXI_WVALID    (M_AXI_WVALID),  .M_AXI_WREADY    (M_AXI_WREADY),
+        .M_AXI_BRESP     (M_AXI_BRESP),   .M_AXI_BVALID    (M_AXI_BVALID),  .M_AXI_BREADY    (M_AXI_BREADY),
+        .M_AXI_ARADDR    (M_AXI_ARADDR),  .M_AXI_ARVALID   (M_AXI_ARVALID), .M_AXI_ARREADY   (M_AXI_ARREADY),
+        .M_AXI_RDATA     (M_AXI_RDATA),   .M_AXI_RRESP     (M_AXI_RRESP),   .M_AXI_RVALID    (M_AXI_RVALID),  .M_AXI_RREADY    (M_AXI_RREADY)
     );
 
     //------------------------------------------------------------------
     // AXI Interconnect  (address decode + 1-master / 3-slave crossbar)
     //------------------------------------------------------------------
-
     axi_interconnect interconnect_i
     (
         .clk (clk), .rst (rst),
-
         // Slave port (from master)
-        .s_awaddr  (M_AXI_AWADDR),  .s_awvalid (M_AXI_AWVALID), .s_awready (M_AXI_AWREADY),
-        .s_wdata   (M_AXI_WDATA),   .s_wstrb   (M_AXI_WSTRB),
-        .s_wvalid  (M_AXI_WVALID),  .s_wready  (M_AXI_WREADY),
-        .s_bresp   (M_AXI_BRESP),   .s_bvalid  (M_AXI_BVALID),  .s_bready  (M_AXI_BREADY),
-        .s_araddr  (M_AXI_ARADDR),  .s_arvalid (M_AXI_ARVALID), .s_arready (M_AXI_ARREADY),
-        .s_rdata   (M_AXI_RDATA),   .s_rresp   (M_AXI_RRESP),
-        .s_rvalid  (M_AXI_RVALID),  .s_rready  (M_AXI_RREADY),
-
-        // Master port 0 — RAM
-        .m0_awaddr  (ram_awaddr),  .m0_awvalid (ram_awvalid),  .m0_awready (ram_awready),
-        .m0_wdata   (ram_wdata),   .m0_wstrb   (ram_wstrb),
-        .m0_wvalid  (ram_wvalid),  .m0_wready  (ram_wready),
-        .m0_bresp   (ram_bresp),   .m0_bvalid  (ram_bvalid),   .m0_bready  (ram_bready),
-        .m0_araddr  (ram_araddr),  .m0_arvalid (ram_arvalid),  .m0_arready (ram_arready),
-        .m0_rdata   (ram_rdata),   .m0_rresp   (ram_rresp),
-        .m0_rvalid  (ram_rvalid),  .m0_rready  (ram_rready),
+        .s_awaddr(M_AXI_AWADDR), .s_awvalid(M_AXI_AWVALID), .s_awready(M_AXI_AWREADY),
+        .s_wdata(M_AXI_WDATA),   .s_wstrb(M_AXI_WSTRB),     .s_wvalid(M_AXI_WVALID),  .s_wready(M_AXI_WREADY),
+        .s_bresp(M_AXI_BRESP),   .s_bvalid(M_AXI_BVALID),   .s_bready(M_AXI_BREADY),
+        .s_araddr(M_AXI_ARADDR), .s_arvalid(M_AXI_ARVALID), .s_arready(M_AXI_ARREADY),
+        .s_rdata(M_AXI_RDATA),   .s_rresp(M_AXI_RRESP),     .s_rvalid(M_AXI_RVALID),  .s_rready(M_AXI_RREADY),
+         
+         // Master port 0 — RAM
+        .m0_awaddr(ram_awaddr),  .m0_awvalid(ram_awvalid),  .m0_awready(ram_awready),
+        .m0_wdata(ram_wdata),    .m0_wstrb(ram_wstrb),      .m0_wvalid(ram_wvalid),   .m0_wready(ram_wready),
+        .m0_bresp(ram_bresp),    .m0_bvalid(ram_bvalid),    .m0_bready(ram_bready),
+        .m0_araddr(ram_araddr),  .m0_arvalid(ram_arvalid),  .m0_arready(ram_arready),
+        .m0_rdata(ram_rdata),    .m0_rresp(ram_rresp),      .m0_rvalid(ram_rvalid),   .m0_rready(ram_rready),
 
         // Master port 1 — GPIO
-        .m1_awaddr  (gpio_awaddr),  .m1_awvalid (gpio_awvalid),  .m1_awready (gpio_awready),
-        .m1_wdata   (gpio_wdata),   .m1_wstrb   (gpio_wstrb),
-        .m1_wvalid  (gpio_wvalid),  .m1_wready  (gpio_wready),
-        .m1_bresp   (gpio_bresp),   .m1_bvalid  (gpio_bvalid),   .m1_bready  (gpio_bready),
-        .m1_araddr  (gpio_araddr),  .m1_arvalid (gpio_arvalid),  .m1_arready (gpio_arready),
-        .m1_rdata   (gpio_rdata),   .m1_rresp   (gpio_rresp),
-        .m1_rvalid  (gpio_rvalid),  .m1_rready  (gpio_rready),
+        .m1_awaddr(gpio_awaddr), .m1_awvalid(gpio_awvalid), .m1_awready(gpio_awready),
+        .m1_wdata(gpio_wdata),   .m1_wstrb(gpio_wstrb),     .m1_wvalid(gpio_wvalid),  .m1_wready(gpio_wready),
+        .m1_bresp(gpio_bresp),   .m1_bvalid(gpio_bvalid),   .m1_bready(gpio_bready),
+        .m1_araddr(gpio_araddr), .m1_arvalid(gpio_arvalid), .m1_arready(gpio_arready),
+        .m1_rdata(gpio_rdata),   .m1_rresp(gpio_rresp),     .m1_rvalid(gpio_rvalid),  .m1_rready(gpio_rready),
 
         // Master port 2 — SPI
-        .m2_awaddr  (spi_awaddr),  .m2_awvalid (spi_awvalid),  .m2_awready (spi_awready),
-        .m2_wdata   (spi_wdata),   .m2_wstrb   (spi_wstrb),
-        .m2_wvalid  (spi_wvalid),  .m2_wready  (spi_wready),
-        .m2_bresp   (spi_bresp),   .m2_bvalid  (spi_bvalid),   .m2_bready  (spi_bready),
-        .m2_araddr  (spi_araddr),  .m2_arvalid (spi_arvalid),  .m2_arready (spi_arready),
-        .m2_rdata   (spi_rdata),   .m2_rresp   (spi_rresp),
-        .m2_rvalid  (spi_rvalid),  .m2_rready  (spi_rready)
+        .m2_awaddr(spi_awaddr),  .m2_awvalid(spi_awvalid),  .m2_awready(spi_awready),
+        .m2_wdata(spi_wdata),    .m2_wstrb(spi_wstrb),      .m2_wvalid(spi_wvalid),   .m2_wready(spi_wready),
+        .m2_bresp(spi_bresp),    .m2_bvalid(spi_bvalid),    .m2_bready(spi_bready),
+        .m2_araddr(spi_araddr),  .m2_arvalid(spi_arvalid),  .m2_arready(spi_arready),
+        .m2_rdata(spi_rdata),    .m2_rresp(spi_rresp),      .m2_rvalid(spi_rvalid),   .m2_rready(spi_rready)
     );
 
     //------------------------------------------------------------------
     // RAM slave  (64 KB: address 0x0000_0000 – 0x0000_FFFF)
     //------------------------------------------------------------------
-
     axi4lite_sram_slave ram_i
     (
-        .clk             (clk),
-        .rst             (rst),
-
-        .S_AXI_AWADDR    (ram_awaddr),.S_AXI_AWVALID   (ram_awvalid),.S_AXI_AWREADY   (ram_awready),
-
-        .S_AXI_WDATA     (ram_wdata),.S_AXI_WSTRB     (ram_wstrb),.S_AXI_WVALID    (ram_wvalid),.S_AXI_WREADY    (ram_wready),
-
-        .S_AXI_BRESP     (ram_bresp),.S_AXI_BVALID    (ram_bvalid),.S_AXI_BREADY    (ram_bready),
-
-        .S_AXI_ARADDR    (ram_araddr),.S_AXI_ARVALID   (ram_arvalid),.S_AXI_ARREADY   (ram_arready),
-
-        .S_AXI_RDATA     (ram_rdata),.S_AXI_RRESP     (ram_rresp),.S_AXI_RVALID    (ram_rvalid),.S_AXI_RREADY    (ram_rready)
+        .clk(clk), .rst(rst),
+        .S_AXI_AWADDR(ram_awaddr), .S_AXI_AWVALID(ram_awvalid), .S_AXI_AWREADY(ram_awready),
+        .S_AXI_WDATA(ram_wdata),   .S_AXI_WSTRB(ram_wstrb),     .S_AXI_WVALID(ram_wvalid),  .S_AXI_WREADY(ram_wready),
+        .S_AXI_BRESP(ram_bresp),   .S_AXI_BVALID(ram_bvalid),   .S_AXI_BREADY(ram_bready),
+        .S_AXI_ARADDR(ram_araddr), .S_AXI_ARVALID(ram_arvalid), .S_AXI_ARREADY(ram_arready),
+        .S_AXI_RDATA(ram_rdata),   .S_AXI_RRESP(ram_rresp),     .S_AXI_RVALID(ram_rvalid),  .S_AXI_RREADY(ram_rready)
     );
 
     //------------------------------------------------------------------
     // GPIO slave  (address 0x1000_0000 – 0x1000_00FF)
     //------------------------------------------------------------------
-
     axi_gpio gpio_i
     (
-        .clk      (clk),         .rst      (rst),
-        .awaddr   (gpio_awaddr), .awvalid  (gpio_awvalid), .awready (gpio_awready),
-        .wdata    (gpio_wdata),  .wstrb    (gpio_wstrb),   .wvalid  (gpio_wvalid),  .wready  (gpio_wready),
-        .bresp    (gpio_bresp),  .bvalid   (gpio_bvalid),  .bready  (gpio_bready),
-        .araddr   (gpio_araddr), .arvalid  (gpio_arvalid), .arready (gpio_arready),
-        .rdata    (gpio_rdata),  .rresp    (gpio_rresp),   .rvalid  (gpio_rvalid),  .rready  (gpio_rready),
-        .gpio_in  (gpio_in),
-        .gpio_out (gpio_out)
+        .clk(clk), .rst(rst),
+        .awaddr(gpio_awaddr), .awvalid(gpio_awvalid), .awready(gpio_awready),
+        .wdata(gpio_wdata),   .wstrb(gpio_wstrb),     .wvalid(gpio_wvalid), .wready(gpio_wready),
+        .bresp(gpio_bresp),   .bvalid(gpio_bvalid),   .bready(gpio_bready),
+        .araddr(gpio_araddr), .arvalid(gpio_arvalid), .arready(gpio_arready),
+        .rdata(gpio_rdata),   .rresp(gpio_rresp),     .rvalid(gpio_rvalid), .rready(gpio_rready),
+        .gpio_in(gpio_in),    .gpio_out(gpio_out)
     );
 
     //------------------------------------------------------------------
     // SPI slave  (address 0x2000_0000 – 0x2000_00FF)
     //------------------------------------------------------------------
-
     axi_spi spi_i
     (
-        .clk      (clk),         .rst      (rst),
-        .awaddr   (spi_awaddr),  .awvalid  (spi_awvalid), .awready (spi_awready),
-        .wdata    (spi_wdata),   .wstrb    (spi_wstrb),   .wvalid  (spi_wvalid),  .wready  (spi_wready),
-        .bresp    (spi_bresp),   .bvalid   (spi_bvalid),  .bready  (spi_bready),
-        .araddr   (spi_araddr),  .arvalid  (spi_arvalid), .arready (spi_arready),
-        .rdata    (spi_rdata),   .rresp    (spi_rresp),   .rvalid  (spi_rvalid),  .rready  (spi_rready),
-        .spi_sclk (spi_sclk),
-        .spi_mosi (spi_mosi),
-        .spi_miso (spi_miso),
-        .spi_cs   (spi_cs)
+        .clk(clk), .rst(rst),
+        .awaddr(spi_awaddr),  .awvalid(spi_awvalid), .awready(spi_awready),
+        .wdata(spi_wdata),    .wstrb(spi_wstrb),     .wvalid(spi_wvalid), .wready(spi_wready),
+        .bresp(spi_bresp),    .bvalid(spi_bvalid),   .bready(spi_bready),
+        .araddr(spi_araddr),  .arvalid(spi_arvalid), .arready(spi_arready),
+        .rdata(spi_rdata),    .rresp(spi_rresp),     .rvalid(spi_rvalid), .rready(spi_rready),
+        .spi_sclk(spi_sclk),  .spi_mosi(spi_mosi),   .spi_miso(spi_miso), .spi_cs(spi_cs)
     );
 
 endmodule
