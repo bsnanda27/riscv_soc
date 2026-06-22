@@ -185,14 +185,20 @@ module rv32i_axi_soc
     // RAM slave  (64 KB: address 0x0000_0000 – 0x0000_FFFF)
     //------------------------------------------------------------------
 
-    axi_ram #(.MEM_DEPTH(16384)) ram_i
+    axi4lite_sram_slave ram_i
     (
-        .clk     (clk),         .rst     (rst),
-        .awaddr  (ram_awaddr),  .awvalid (ram_awvalid), .awready (ram_awready),
-        .wdata   (ram_wdata),   .wstrb   (ram_wstrb),   .wvalid  (ram_wvalid),  .wready  (ram_wready),
-        .bresp   (ram_bresp),   .bvalid  (ram_bvalid),  .bready  (ram_bready),
-        .araddr  (ram_araddr),  .arvalid (ram_arvalid), .arready (ram_arready),
-        .rdata   (ram_rdata),   .rresp   (ram_rresp),   .rvalid  (ram_rvalid),  .rready  (ram_rready)
+        .clk             (clk),
+        .rst             (rst),
+
+        .S_AXI_AWADDR    (ram_awaddr),.S_AXI_AWVALID   (ram_awvalid),.S_AXI_AWREADY   (ram_awready),
+
+        .S_AXI_WDATA     (ram_wdata),.S_AXI_WSTRB     (ram_wstrb),.S_AXI_WVALID    (ram_wvalid),.S_AXI_WREADY    (ram_wready),
+
+        .S_AXI_BRESP     (ram_bresp),.S_AXI_BVALID    (ram_bvalid),.S_AXI_BREADY    (ram_bready),
+
+        .S_AXI_ARADDR    (ram_araddr),.S_AXI_ARVALID   (ram_arvalid),.S_AXI_ARREADY   (ram_arready),
+
+        .S_AXI_RDATA     (ram_rdata),.S_AXI_RRESP     (ram_rresp),.S_AXI_RVALID    (ram_rvalid),.S_AXI_RREADY    (ram_rready)
     );
 
     //------------------------------------------------------------------
